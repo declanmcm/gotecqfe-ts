@@ -6,7 +6,7 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<Navigate to="/judge-manager/auth"/>}/>
-            <Route path="/gotecqfe" element={<Navigate to="/judge-manager/auth"/>}/>
+            <Route path="/gotecqfe-ts" element={<Navigate to="/judge-manager/auth"/>}/>
             <Route path="/judge-manager/app" element={<JudgeApp/>}/>
             <Route path="/judge-manager/auth" element={<JudgeAuth/>}/>
             <Route path="/judge-manager/app/user" element={<List type='user' />}/>
