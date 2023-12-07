@@ -39,27 +39,38 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
             <div style={{display: 'flex', alignItems: 'stretch'}}>
                 <div style={{margin: 5, flex: 1}}>
                     <p>
-                        Username: {currentUser.username} <br/>
-                        Full name: {currentUser.first_name && currentUser.last_name ? currentUser.first_name + currentUser.last_name : "None"}
+                        Username: {currentUser.username} <br/><br/>
+                        Full name: {currentUser.first_name && currentUser.last_name ? currentUser.first_name + currentUser.last_name : "None"} <br/><br/>
+                        ID: {currentUser.id} <br/><br/>
+                        Superuser: {currentUser.is_superuser ? "Yes" : "No"}
                     </p>
                 </div>
                 <div style={{margin: 5, flex: 1}}>
                     <p>
-                        Verified: {currentUser.is_verified ? "Yes" : "No"} <br/>
-                        Email: {currentUser.email}
+                        Verified: {currentUser.is_verified ? "Yes" : "No"} <br/><br/>
+                        Email: {currentUser.email} <br/><br/>
+                        Password: {currentUser.password} <br/><br/>
+                        Create time: {currentUser.create_time} <br/><br/>
+                        Update time: {currentUser.update_time} <br/><br/>
+                        Profile picture: {currentUser.profile_pic} <br/><br/>
                     </p>
                 </div>
                 <div style={{margin: 5,  flex: 1}}>
                     <p>
-                        Last login: {currentUser.last_login == null ? "Never" : currentUser.last_login}<br/>
+                        Last login: {currentUser.last_login == null ? "Never" : currentUser.last_login}<br/><br/>
+                        Admin type: {currentUser.admin_type} <br/><br/>
+                        Problem permission: {currentUser.problem_permission} <br/><br/>
+                        Active: {currentUser.is_active ? "Yes" : "No"} <br/><br/>
+                        Staff: {currentUser.is_staff ? "Yes" : "No"}
                     </p>
                 </div>
             </div>
             <p>
-                Groups: <br/>{currentUser.groups.length === 0 ? "None" : currentUser.groups.toString()}
+                Groups: <br/>{currentUser.groups.length === 0 ? "None" : currentUser.groups.toString()}<br/><br/>
             </p>
             <p>
-                Problems: <br/> {currentUser.solved_problem.length === 0 ? "None" : currentUser.solved_problem.toString()}
+                Problems: <br/> {currentUser.solved_problem.length === 0 ? "None" : currentUser.solved_problem.toString()} <br/><br/>
+                User permissions: <br/> {currentUser.user_permissions.length == 0 ? "None" : currentUser.user_permissions.toString()}
             </p>
         </div> : null }
     </div>);

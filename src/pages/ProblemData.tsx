@@ -33,24 +33,36 @@ function ProblemData( { problem, hidden, setHidden } : ProblemDataProps) {
             <div style={{display: 'flex', alignItems: 'stretch'}}>
                 <div style={{margin: 5, flex: 1}}>
                     <p>
-                        Author ID: {problem.author_id} <br/>
-                        Author Name: {problem.author_name}
+                        ID: {problem.id} <br/><br/>
+                        Display ID: {problem.display_id} <br/><br/>
+                        Author ID: {problem.author_id} <br/><br/>
+                        Author Name: {problem.author_name}<br/><br/>
+                        Time limit: {problem.time_limit} <br/><br/>
+                        Memory limit: {problem.memory_limit} <br/><br/>
                     </p>
                 </div>
                 <div style={{margin: 5, flex: 1}}>
                     <p>
-                        Created: {problem.created} <br/>
-                        Difficulty: {problem.difficulty}
+                        Created: {problem.created} <br/><br/>
+                        Difficulty: {problem.difficulty} <br/><br/>
+                        Visible: {problem.is_visible ? "Yes" : "No"} <br/><br/>
+                        Total submissions: {problem.total_submission} <br/><br/>
+                        Correct submissions: {problem.correct_submission} <br/><br/>
                     </p>
                 </div>
                 <div style={{margin: 5,  flex: 1}}>
                     <p>
-                        Time limit: {problem.time_limit}<br/>
+                        Time limit: {problem.time_limit}<br/><br/>
+                        Tags: {problem.tags.toString()}<br/><br/>
+                        Source: {problem.source}<br/><br/>
+                        Sample test: {problem.sample_test.toString()}<br/><br/>
+                        Test zip: {problem.test_zip ? problem.test_zip : "None"}
                     </p>
                 </div>
             </div>
             <p>
-                Question: <br/>{problem.statement}
+                Question: <br/>{problem.statement}<br/><br/>
+                Statistic info: {problem.statistic_info.toString()}
             </p>
         </div> : null}
     </div>);

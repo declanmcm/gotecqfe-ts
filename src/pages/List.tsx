@@ -58,18 +58,23 @@ function List( { type }: ListProps ) {
                     'Authorization': "Token " + storedToken }});
                 data = await response.json();
                 if ((data && 'detail' in data && data.detail === "Invalid token") || (data && 'detail' in data && data.detail === "Token has expired")) navigate('/judge-manager/auth');
+                console.log("Data: ");
                 console.log(data);
                 if (data && 'data' in data && data.data) {
+                    console.log("Data.data:");
                     console.log(data.data);
                     setItems(data.data);
-                    if (id !== 'all' && id !== 'new') {
-                        (data.data as Array<User>).forEach((item : User) => {
-                            if (item.id === parseInt(id ? id : '0')) setCurrentItem(item);
+                    if (id !== 'all' && id !== 'new' && id !== undefined) {
+                        (data.data as Array<User> | Array<Problem>).forEach((item : User | Problem) => {
+                            if (item.id === parseInt(id ? id : '0')) {
+                                setCurrentItem(item);
+                            }
                         });
+                    } else {
+                        console.log("HEYYYYYY");
+                        setCurrentItem(data.data[0]);
                     }
                 }
-                
-                console.log("current: " + currentItem);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -83,8 +88,11 @@ function List( { type }: ListProps ) {
         if (storedToken !== '') {
             fetchData();
         }
+                
+        console.log("current: " + currentItem);
 
-        }, [type, token, currentItem, id, navigate]);
+
+        }, [type, token, id, navigate]);
 
     return (
         <div id="modal-root">
