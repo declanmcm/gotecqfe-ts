@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {useState, useEffect} from "react";
-import Header from '../components/Header.js';
+import Header from '../components/Header';
 import styles from '../styles';
 import { UserData, ProblemData, ProblemEditor } from '.';
 import ReactDOM from "react-dom";
@@ -10,14 +10,12 @@ import { User, UserResponse, Problem, ProblemResponse, ExpiredTokenResponse } fr
 const url = 'https://34.124.232.186:5000/';
 
 type ListProps = {
-    user: any,
     type: string
 }
 
-function List( { user, type }: ListProps ) {
+function List( { type }: ListProps ) {
     const navigate = useNavigate();
 
-    const [displayEdit, setDisplayEdit] = useState<boolean>(false);
     const [items, setItems] = useState<Array<Problem>  | Array<User> | null>(null);
     const [filteredItems, setFilteredItems] = useState<Array<Problem> | Array<User> | null>(null);
     const [currentItem, setCurrentItem] = useState<User | Problem | null>(null);
@@ -50,7 +48,7 @@ function List( { user, type }: ListProps ) {
             let data = null as ProblemResponse | UserResponse | ExpiredTokenResponse | null;
             try {
                 let toAppend = '';
-                if (type == 'user') toAppend = 'admin/users';
+                if (type === 'user') toAppend = 'admin/users';
                 else toAppend = 'problem';
                 const response = await fetch(url + toAppend, {
                     method: "GET",
@@ -59,14 +57,14 @@ function List( { user, type }: ListProps ) {
                     'Content-Type': 'application/json',
                     'Authorization': "Token " + storedToken }});
                 data = await response.json();
-                if ((data && 'detail' in data && data.detail == "Invalid token") || (data && 'detail' in data && data.detail == "Token has expired")) navigate('/judge-manager/auth');
+                if ((data && 'detail' in data && data.detail === "Invalid token") || (data && 'detail' in data && data.detail === "Token has expired")) navigate('/judge-manager/auth');
                 console.log(data);
                 if (data && 'data' in data && data.data) {
                     console.log(data.data);
                     setItems(data.data);
                     if (id != 'all' && id != 'new') {
                         (data.data as Array<User>).forEach((item : User) => {
-                            if (item.id == parseInt(id ? id : '0')) setCurrentItem(item);
+                            if (item.id === parseInt(id ? id : '0')) setCurrentItem(item);
                         });
                     }
                 }
@@ -82,7 +80,7 @@ function List( { user, type }: ListProps ) {
         setCurrentItem(null);
         setFilteredItems(null);
 
-        if (storedToken != '') {
+        if (storedToken !== '') {
             fetchData();
         }
 
@@ -90,12 +88,12 @@ function List( { user, type }: ListProps ) {
 
     return (
         <div id="modal-root">
-            {token == '' ? 
+            {token === '' ? 
             <div>
                 <p style={{fontSize: '26px', color: 'white'}}>Loading</p>
             </div> :
             <div>
-                <Header text={type == 'user' ? 'Problem' : 'User'}/>
+                <Header text={type === 'user' ? 'Problem' : 'User'}/>
                 <div style={styles.containerStyle}>
                     <div style={{
                                 flex: 1,
@@ -105,16 +103,16 @@ function List( { user, type }: ListProps ) {
                                 borderRadius: 10,
                                 borderColor: 'grey',
                                 margin: 15}}>
-                        <h1>{type == 'user' ? 'Users' : 'Problems'}</h1>
-                        {type == 'problem' ? <button style={styles.buttonStyleApp} onClick={() => navigate('/judge-manager/app/problem/new') }> Create problem</button> : null}
+                        <h1>{type === 'user' ? 'Users' : 'Problems'}</h1>
+                        {type === 'problem' ? <button style={styles.buttonStyleApp} onClick={() => navigate('/judge-manager/app/problem/new') }> Create problem</button> : null}
                         {filteredItems != null ? (filteredItems.map(item => {
                             return <div onClick={() => setCurrentItem(item)} style={currentItem != null && currentItem.id == item.id ? {borderStyle: 'solid', borderColor: "#2424c7", borderRadius: 10, margin: 15} : {borderStyle: 'solid', borderRadius: 10, margin: 15}}>
-                                <p style={{fontSize: '22px', userSelect: 'none'}}>{type == 'user' && 'username' in item ? item.username : 'title' in item ? item.title : null}</p>
+                                <p style={{fontSize: '22px', userSelect: 'none'}}>{type === 'user' && 'username' in item ? item.username : 'title' in item ? item.title : null}</p>
                             </div>
                         })) : <div>{items != null ? 
                         (items.map(item => {
                             return <div onClick={() => setCurrentItem(item)} style={currentItem != null && currentItem.id == item.id ? {borderStyle: 'solid', borderColor: "#2424c7", borderRadius: 10, margin: 15} : {borderStyle: 'solid', borderRadius: 10, margin: 15}}>
-                                <p style={{fontSize: '22px', userSelect: 'none'}}>{type == 'user' && 'username' in item ? item.username : 'title' in item ? item.title : null}</p>
+                                <p style={{fontSize: '22px', userSelect: 'none'}}>{type === 'user' && 'username' in item ? item.username : 'title' in item ? item.title : null}</p>
                             </div>
                         })) : null}</div>}
                     </div>
@@ -127,12 +125,12 @@ function List( { user, type }: ListProps ) {
                                 borderRadius: 10,
                                 borderColor: 'grey',
                                 margin: 15}}>
-                        {currentItem == null || (type == 'user' && 'is_superuser' in currentItem && currentItem.is_superuser == null) ? (<h1>No item selected</h1>) : (<div>{'is_superuser' in currentItem ? <UserData currentUser={currentItem} hidden={hidden} setHidden={setHidden} items={items as Array<User>} setFilteredItems={setFilteredItems} /> : <ProblemData problem={currentItem} hidden={hidden} setHidden={setHidden} />}</div>)}
+                        {currentItem == null || (type === 'user' && 'is_superuser' in currentItem && currentItem.is_superuser == null) ? (<h1>No item selected</h1>) : (<div>{'is_superuser' in currentItem ? <UserData currentUser={currentItem} hidden={hidden} setHidden={setHidden} items={items as Array<User>} setFilteredItems={setFilteredItems} /> : <ProblemData problem={currentItem} hidden={hidden} setHidden={setHidden} />}</div>)}
                         
                     </div>
                 </div>
             </div>}
-            {id !=  null && id != 'all' ? <Modal child={<ProblemEditor toEdit={id == "new" ? null : currentItem} id={id} />}/> : null}
+            {id !=  null && id !== 'all' ? <Modal child={<ProblemEditor toEdit={id === "new" ? null : currentItem} id={id} />}/> : null}
         </div>
     );
 }

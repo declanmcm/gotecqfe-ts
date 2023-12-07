@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import {useState, useEffect} from "react";
+import { useState } from "react";
 import styles from '../styles';
 import { AuthUser, AuthResponse } from '../models';
 
@@ -15,7 +15,6 @@ function JudgeAuth( { setUser } : JudgeAuthProps ) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [failedLogin, setFailedLogin] = useState(false);
-    const [token, setToken] = useState('');
 
     async function sendLoginDetails() {
         let json: AuthResponse | null = null;
@@ -35,7 +34,6 @@ function JudgeAuth( { setUser } : JudgeAuthProps ) {
         if (json && json.error === "none") {
             setUser(json.data);
             window.localStorage.setItem('token', json.data.token);
-            setToken(json.data.token);
             navigate("/judge-manager/app")
         } else {
             setFailedLogin(true);

@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import styles from '../styles';
 import { Problem } from '../models';
 
-const url = 'https://34.124.232.186:5000/admin/users/';
 type ProblemDataProps = {
     problem: Problem,
     hidden: boolean,

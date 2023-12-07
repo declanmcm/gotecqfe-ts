@@ -14,8 +14,8 @@ function App() {
             <Route path="/gotecqfe" element={<Navigate to="/judge-manager/auth"/>}/>
             <Route path="/judge-manager/app" element={<JudgeApp/>}/>
             <Route path="/judge-manager/auth" element={<JudgeAuth setUser={setUser} />}/>
-            <Route path="/judge-manager/app/user" element={<List user={user} type='user' />}/>
-            <Route path="/judge-manager/app/problem/:id" element={<List user={user} type='problem' />}/>
+            <Route path="/judge-manager/app/user" element={<List type='user' />}/>
+            <Route path="/judge-manager/app/problem/:id" element={<List type='problem' />}/>
         </Routes>
     );
 }
