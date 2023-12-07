@@ -1,6 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Header from '../components/Header.js';
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styles from '../styles';
 import { Problem, User, getProblem } from '../models';
 
@@ -15,18 +14,16 @@ function ProblemEditor({ toEdit, id } : ProblemEditorProps) {
     if (toEdit != null) initItem = toEdit;
     const [problem, setProblem] = useState<Problem | User>(initItem);
     const [error, setError] = useState<string | null>(null);
-    const [token, setToken] = useState<string | null>('');
 
     async function postProblem() {
         let method = "PUT";
         let toAppend = id;
-        if (id == "new") {
+        if (id === "new") {
             method = "POST";
             toAppend = "";
         }
 
         let storedToken = window.localStorage.getItem('token');
-        if ( storedToken !== "" ) setToken(storedToken);
 
         console.log(JSON.stringify(problem));
 
@@ -46,11 +43,11 @@ function ProblemEditor({ toEdit, id } : ProblemEditorProps) {
                 body: data
             });
             let json = await response.json();
-            if (json.detail == "Invalid token") navigate('/judge-manager/auth');
+            if (json.detail === "Invalid token") navigate('/judge-manager/auth');
             console.log(json);
-            if (json.error != 'none') {
+            if (json.error !== 'none') {
                 let error = json.data;
-                if (json.error == "Failed to handle request") {
+                if (json.error === "Failed to handle request") {
                     error = "Please fill all fields";
                 }
                 setError(error);
@@ -63,7 +60,7 @@ function ProblemEditor({ toEdit, id } : ProblemEditorProps) {
     
     return (
         <div>
-            <h1 style={styles.headingStyleProblem}>{id == "new" ? "Create new problem" : "Edit problem"}</h1>
+            <h1 style={styles.headingStyleProblem}>{id === "new" ? "Create new problem" : "Edit problem"}</h1>
             <form>
                 <fieldset style={styles.formStyleProblem}>
                     <div>

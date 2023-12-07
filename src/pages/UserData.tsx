@@ -1,11 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
-import {useState, useEffect} from "react";
-import Header from '../components/Header.js';
+import { useEffect} from "react";
 import styles from '../styles';
-import List from "./List.js";
 import { User, Problem } from '../models';
 
-const url = 'https://34.124.232.186:5000/admin/users/';
 type UserDataProps = {
     currentUser : User,
     items: Array<User>,
@@ -23,8 +19,8 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
     useEffect(() => {
         let storedHidden = window.localStorage.getItem('hidden');
         console.log(storedHidden);
-        setHidden(storedHidden != "true");
-    }, []);
+        setHidden(storedHidden !== "true");
+    });
 
     function findSimilar() {
         let newList = [] as Array<User>;
@@ -39,7 +35,7 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
             <button style={styles.buttonStyleApp} onClick={findSimilar} > Find similar</button>
             <button style={styles.buttonStyleApp} onClick={toggleHidden}> {hidden ? 'Show' : 'Hide'} submission </button>
         </div>
-        {hidden == false ? <div style={{fontSize: '30px'}}>
+        {hidden === false ? <div style={{fontSize: '30px'}}>
             <div style={{display: 'flex', alignItems: 'stretch'}}>
                 <div style={{margin: 5, flex: 1}}>
                     <p>
@@ -60,10 +56,10 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
                 </div>
             </div>
             <p>
-                Groups: <br/>{currentUser.groups.length == 0 ? "None" : currentUser.groups.toString()}
+                Groups: <br/>{currentUser.groups.length === 0 ? "None" : currentUser.groups.toString()}
             </p>
             <p>
-                Problems: <br/> {currentUser.solved_problem.length == 0 ? "None" : currentUser.solved_problem.toString()}
+                Problems: <br/> {currentUser.solved_problem.length === 0 ? "None" : currentUser.solved_problem.toString()}
             </p>
         </div> : null }
     </div>);

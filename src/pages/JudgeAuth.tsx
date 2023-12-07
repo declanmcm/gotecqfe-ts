@@ -1,14 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from '../styles';
-import { AuthUser, AuthResponse } from '../models';
+import { AuthResponse } from '../models';
 
 const url = 'https://34.124.232.186:5000/login/';
-type JudgeAuthProps = {
-    setUser: React.Dispatch<React.SetStateAction<AuthUser | null>>
-}
 
-function JudgeAuth( { setUser } : JudgeAuthProps ) { 
+function JudgeAuth() { 
     
     const navigate = useNavigate();
     
@@ -32,7 +29,6 @@ function JudgeAuth( { setUser } : JudgeAuthProps ) {
         console.log(json);
 
         if (json && json.error === "none") {
-            setUser(json.data);
             window.localStorage.setItem('token', json.data.token);
             navigate("/judge-manager/app")
         } else {

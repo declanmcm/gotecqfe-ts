@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {useState, useEffect} from "react";
 import Header from '../components/Header';
 import styles from '../styles';
@@ -62,7 +62,7 @@ function List( { type }: ListProps ) {
                 if (data && 'data' in data && data.data) {
                     console.log(data.data);
                     setItems(data.data);
-                    if (id != 'all' && id != 'new') {
+                    if (id !== 'all' && id !== 'new') {
                         (data.data as Array<User>).forEach((item : User) => {
                             if (item.id === parseInt(id ? id : '0')) setCurrentItem(item);
                         });
@@ -84,7 +84,7 @@ function List( { type }: ListProps ) {
             fetchData();
         }
 
-        }, [type, token]);
+        }, [type, token, currentItem, id, navigate]);
 
     return (
         <div id="modal-root">
@@ -106,12 +106,12 @@ function List( { type }: ListProps ) {
                         <h1>{type === 'user' ? 'Users' : 'Problems'}</h1>
                         {type === 'problem' ? <button style={styles.buttonStyleApp} onClick={() => navigate('/judge-manager/app/problem/new') }> Create problem</button> : null}
                         {filteredItems != null ? (filteredItems.map(item => {
-                            return <div onClick={() => setCurrentItem(item)} style={currentItem != null && currentItem.id == item.id ? {borderStyle: 'solid', borderColor: "#2424c7", borderRadius: 10, margin: 15} : {borderStyle: 'solid', borderRadius: 10, margin: 15}}>
+                            return <div onClick={() => setCurrentItem(item)} style={currentItem != null && currentItem.id === item.id ? {borderStyle: 'solid', borderColor: "#2424c7", borderRadius: 10, margin: 15} : {borderStyle: 'solid', borderRadius: 10, margin: 15}}>
                                 <p style={{fontSize: '22px', userSelect: 'none'}}>{type === 'user' && 'username' in item ? item.username : 'title' in item ? item.title : null}</p>
                             </div>
                         })) : <div>{items != null ? 
                         (items.map(item => {
-                            return <div onClick={() => setCurrentItem(item)} style={currentItem != null && currentItem.id == item.id ? {borderStyle: 'solid', borderColor: "#2424c7", borderRadius: 10, margin: 15} : {borderStyle: 'solid', borderRadius: 10, margin: 15}}>
+                            return <div onClick={() => setCurrentItem(item)} style={currentItem != null && currentItem.id === item.id ? {borderStyle: 'solid', borderColor: "#2424c7", borderRadius: 10, margin: 15} : {borderStyle: 'solid', borderRadius: 10, margin: 15}}>
                                 <p style={{fontSize: '22px', userSelect: 'none'}}>{type === 'user' && 'username' in item ? item.username : 'title' in item ? item.title : null}</p>
                             </div>
                         })) : null}</div>}
