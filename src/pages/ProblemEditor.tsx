@@ -2,6 +2,55 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from '../styles';
 import { Problem, User, getProblem } from '../models';
+import styled from 'styled-components';
+
+const Heading = styled.h1`
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+    color: white;
+    font-size: 76px;
+    padding-top: 450px;
+`;
+
+const Fieldset = styled.fieldset`
+    display: block;
+    flex-direction: column;
+    font-family: Helvetica, sans-serif;
+    color: var(--text-form);
+    align-items: left;
+    width: 65%;
+    margin: auto;
+    margin-top: 50px;
+    font-size: 24px;
+    border-radius: 10px;
+`;
+
+const Input = styled.input`
+    width: 40%;
+    font-size: 24px;
+`;
+
+const TextArea = styled.textarea`
+    width: 75%;
+    height: 150px;
+    font-size: 18px;
+`;
+
+const TextAreaSmall = styled.textarea`
+    width: 55%;
+    height: 150px;
+`;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    align-items: space-between;
+`;
+
+const RedText = styled.p`
+    font-size: 20px;
+    color: var(--text-error);
+`;
+
 
 type ProblemEditorProps = {
     toEdit: Problem | User | null,
@@ -60,15 +109,15 @@ function ProblemEditor({ toEdit, id } : ProblemEditorProps) {
     
     return (
         <div>
-            <h1 style={styles.headingStyleProblem}>{id === "new" ? "Create new problem" : "Edit problem"}</h1>
+            <Heading>{id === "new" ? "Create new problem" : "Edit problem"}</Heading>
             <form>
-                <fieldset style={styles.formStyleProblem}>
+                <Fieldset>
                     <div>
                         <label>
                             Display id
                         </label>
                         <div>
-                            <input value={'display_id' in problem ? problem.display_id : ""} style={{width: '40%', fontSize: '24px'}} name="display_id" type="text" onChange={(e) => setProblem({...problem, display_id: e.target.value})}/>
+                            <Input value={'display_id' in problem ? problem.display_id : ""} name="display_id" type="text" onChange={(e) => setProblem({...problem, display_id: e.target.value})}/>
                         </div>
                     </div>
                     <div>
@@ -76,7 +125,7 @@ function ProblemEditor({ toEdit, id } : ProblemEditorProps) {
                             Title
                         </label>
                         <div>
-                            <input value={'title' in problem ? problem.title : ""} style={{width: '40%', fontSize: '24px'}} name="title" type="text" onChange={(e) => setProblem({...problem, title: e.target.value})}/>
+                            <Input value={'title' in problem ? problem.title : ""} name="title" type="text" onChange={(e) => setProblem({...problem, title: e.target.value})}/>
                         </div>
                     </div>
                     <div>
@@ -84,7 +133,7 @@ function ProblemEditor({ toEdit, id } : ProblemEditorProps) {
                             Statement
                         </label>
                         <div>
-                            <textarea value={'statement' in problem ? problem.statement : ""} style={{width: '75%', height: '150px', fontSize: '18px'}} name="statement" onChange={(e) => setProblem({...problem, statement: e.target.value})}></textarea>
+                            <TextArea value={'statement' in problem ? problem.statement : ""} name="statement" onChange={(e) => setProblem({...problem, statement: e.target.value})}></TextArea>
                         </div>
                     </div>
                     <div>
@@ -104,7 +153,7 @@ function ProblemEditor({ toEdit, id } : ProblemEditorProps) {
                             Source
                         </label>
                         <div>
-                            <textarea value={'source' in problem && problem.source ? problem.source : ""} style={{width: '55%', height: '150px'}} name="source" onChange={(e) => setProblem({...problem, source: e.target.value})}></textarea>
+                            <TextAreaSmall value={'source' in problem && problem.source ? problem.source : ""} name="source" onChange={(e) => setProblem({...problem, source: e.target.value})}></TextAreaSmall>
                         </div>
                     </div>
                     <div>
@@ -112,7 +161,7 @@ function ProblemEditor({ toEdit, id } : ProblemEditorProps) {
                             Sample test
                         </label>
                         <div>
-                        <textarea defaultValue={'sample_test' in problem ? JSON.stringify(problem.sample_test) : ""} style={{width: '55%', height: '150px'}} name="sample_test" onChange={(e) => {setProblem({...problem, sample_test: JSON.parse(e.target.value)??'123123'});}}/>
+                        <TextAreaSmall defaultValue={'sample_test' in problem ? JSON.stringify(problem.sample_test) : ""} name="sample_test" onChange={(e) => {setProblem({...problem, sample_test: JSON.parse(e.target.value)??'123123'});}}/>
                         </div>
                     </div>
                     <div>
@@ -165,13 +214,13 @@ function ProblemEditor({ toEdit, id } : ProblemEditorProps) {
                         </div>
                     </div>
                     <div>
-                        <div style={{display: 'flex', alignItems: 'space-between'}}>
+                        <ButtonContainer>
                             <button onClick={(e) => {e.preventDefault(); postProblem();}}>Save</button>
                             <button onClick={(e) => {e.preventDefault(); navigate('/judge-manager/app/problem/all')}} > Close </button>
-                        </div>
-                        <p style={{fontSize: '20px', color: 'red'}}>{error != null ? error : null}</p>
+                        </ButtonContainer>
+                        <RedText>{error != null ? error : null}</RedText>
                     </div>
-                </fieldset>
+                </Fieldset>
             </form>
         </div>
     );

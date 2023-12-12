@@ -2,6 +2,36 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import styles from '../styles';
 import { Problem } from '../models';
+import styled from 'styled-components';
+
+const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+`;
+
+const Button = styled.button`
+    font-size: 30px;
+    background-color: var(--button-colour);
+    color: black;
+    font-family: Helvetica, sans-serif;
+    border-radius: 8;
+    padding: 8;
+`;
+
+const TextContainer = styled.div`
+    font-size: 30px;
+`;
+
+const Container = styled.div`
+    display: flex;
+    align-items: stretch;
+`;
+
+const FlexContainer = styled.div`
+    margin: 5px;
+    flex: 1;
+`;
 
 type ProblemDataProps = {
     problem: Problem,
@@ -25,13 +55,13 @@ function ProblemData( { problem, hidden, setHidden } : ProblemDataProps) {
     return (
     <div>
         <h1>{problem.title}</h1>
-        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
-            <button style={styles.buttonStyleApp} onClick={() => navigate(`/judge-manager/app/problem/${problem.id}`) }> Edit problem</button>
-            <button style={styles.buttonStyleApp} onClick={toggleHidden}> {hidden ? 'Show' : 'Hide'} submission </button>
-        </div>
-        <div style={{fontSize: '30px'}}>
-            <div style={{display: 'flex', alignItems: 'stretch'}}>
-                <div style={{margin: 5, flex: 1}}>
+        <ButtonContainer>
+            <Button onClick={() => navigate(`/judge-manager/app/problem/${problem.id}`) }> Edit problem</Button>
+            <Button onClick={toggleHidden}> {hidden ? 'Show' : 'Hide'} submission </Button>
+        </ButtonContainer>
+        <TextContainer>
+            <Container>
+                <FlexContainer>
                     <p>
                         ID: {problem.id} <br/><br/>
                         Display ID: {problem.display_id} <br/><br/>
@@ -40,8 +70,8 @@ function ProblemData( { problem, hidden, setHidden } : ProblemDataProps) {
                         Time limit: {problem.time_limit} <br/><br/>
                         Memory limit: {problem.memory_limit} <br/><br/>
                     </p>
-                </div>
-                <div style={{margin: 5, flex: 1}}>
+                </FlexContainer>
+                <FlexContainer>
                     <p>
                         Created: {problem.created} <br/><br/>
                         Difficulty: {problem.difficulty} <br/><br/>
@@ -49,8 +79,8 @@ function ProblemData( { problem, hidden, setHidden } : ProblemDataProps) {
                         Total submissions: {problem.total_submission} <br/><br/>
                         Correct submissions: {problem.correct_submission} <br/><br/>
                     </p>
-                </div>
-                <div style={{margin: 5,  flex: 1}}>
+                </FlexContainer>
+                <FlexContainer>
                     <p>
                         Time limit: {problem.time_limit}<br/><br/>
                         Tags: {problem.tags.toString()}<br/><br/>
@@ -58,13 +88,13 @@ function ProblemData( { problem, hidden, setHidden } : ProblemDataProps) {
                         Sample test: {problem.sample_test.toString()}<br/><br/>
                         Test zip: {problem.test_zip ? problem.test_zip : "None"}
                     </p>
-                </div>
-            </div>
+                </FlexContainer>
+            </Container>
             <p>
                 Question: <br/>{problem.statement}<br/><br/>
                 Statistic info: {problem.statistic_info.toString()}
             </p>
-        </div>
+        </TextContainer>
     </div>);
 }
 

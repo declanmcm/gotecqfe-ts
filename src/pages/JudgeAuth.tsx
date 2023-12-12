@@ -2,8 +2,56 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from '../styles';
 import { AuthResponse } from '../models';
+import styled from 'styled-components';
 
 const url = 'https://34.124.232.186:5000/login/';
+
+const Page = styled.div`
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const Container = styled.div`
+    width: 20%;
+    height: 500px;
+    background-color: var(--auth-container-colour);
+    padding: 20px;
+`;
+
+const Heading = styled.div`
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+    font-style: oblique;
+    color: black;
+    font-size: 68px;
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+    margin: auto;
+    margin-top: 50px;
+    font-size: 24px;
+`;
+
+const Button = styled.button`
+    background-color: var(--button-colour);
+    color: white;
+    padding: 10;
+    margin: 10;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+`;
+
+const RedText = styled.p`
+    color: var(--text-error);
+    font-size: 13px;  
+`;
 
 function JudgeAuth() { 
     
@@ -41,39 +89,39 @@ function JudgeAuth() {
     }
   
     return (
-        <div style={styles.pageStyle}>
-            <div style={styles.containerAuthStyle}>
-                <h1 style={styles.headingStyle}>
+        <Page>
+            <Container>
+                <Heading>
                     Login
-                </h1>
-                <form style={styles.formStyle}>
-            <label htmlFor="username">Username:</label>
-            <input
-            type="text"
-            id="username"
-            placeholder="Enter your username"
-            style={styles.inputStyle}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            />
+                </Heading>
+                <Form>
+                    <label htmlFor="username">Username:</label>
+                    <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter your username"
+                    style={styles.inputStyle}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    />
 
-            <label htmlFor="password">Password:</label>
-            <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            style={styles.inputStyle}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            />
-            {failedLogin ? <p style={{color: 'red', fontSize: '13px'}}>Incorrect username or password</p> : null}
+                    <label htmlFor="password">Password:</label>
+                    <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    style={styles.inputStyle}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    />
+                    {failedLogin ? <RedText>Incorrect username or password</RedText> : null}
 
-            <button type="button" style={styles.buttonStyle} onClick={sendLoginDetails}>
-            Login
-            </button>
-        </form>
-            </div>
-        </div>
+                    <Button type="button" onClick={sendLoginDetails}>
+                    Login
+                    </Button>
+                </Form>
+            </Container>
+        </Page>
     );
   }
   

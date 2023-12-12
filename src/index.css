@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --panel-colour: #9ccbd9;
+  --item-colour: #b3b5b4;
+  --border-colour: grey;
+  --text-light: white;
+  --text-dark: black;
+  --button-colour: #80a1e8;
+  --selected-colour: #2424c7;
+  --auth-container-colour: #e5f2dc;
+  --text-error: red;
+  --text-form: #4f4e4e;
+}

@@ -1,6 +1,36 @@
 import { useEffect} from "react";
 import styles from '../styles';
 import { User, Problem } from '../models';
+import styled from 'styled-components';
+
+const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+`;
+
+const Button = styled.button`
+    font-size: 30px;
+    background-color: var(--button-colour);
+    color: var(--text-dark);
+    font-family: Helvetica, sans-serif;
+    border-radius: 8px;
+    padding: 8px;
+`;
+
+const Container = styled.div`
+    font-size: 30px;
+`;
+
+const FlexContainer = styled.div`
+    display: flex;
+    align-items: stretch;
+`;
+
+const InfoContainer = styled.div`
+    margin: 5px;
+    flex: 1;
+`;
 
 type UserDataProps = {
     currentUser : User,
@@ -31,21 +61,21 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
     return (
     <div>
         <h1>{currentUser.username}</h1>
-        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
-            <button style={styles.buttonStyleApp} onClick={findSimilar} > Find similar</button>
-            <button style={styles.buttonStyleApp} onClick={toggleHidden}> {hidden ? 'Show' : 'Hide'} submission </button>
-        </div>
-        <div style={{fontSize: '30px'}}>
-            <div style={{display: 'flex', alignItems: 'stretch'}}>
-                <div style={{margin: 5, flex: 1}}>
+        <ButtonContainer>
+            <Button onClick={findSimilar} > Find similar</Button>
+            <Button onClick={toggleHidden}> {hidden ? 'Show' : 'Hide'} submission </Button>
+        </ButtonContainer>
+        <Container>
+            <FlexContainer>
+                <InfoContainer>
                     <p>
                         Username: {currentUser.username} <br/><br/>
                         Full name: {currentUser.first_name && currentUser.last_name ? currentUser.first_name + currentUser.last_name : "None"} <br/><br/>
                         ID: {currentUser.id} <br/><br/>
                         Superuser: {currentUser.is_superuser ? "Yes" : "No"}
                     </p>
-                </div>
-                <div style={{margin: 5, flex: 1}}>
+                </InfoContainer>
+                <InfoContainer>
                     <p>
                         Verified: {currentUser.is_verified ? "Yes" : "No"} <br/><br/>
                         Email: {currentUser.email} <br/><br/>
@@ -54,8 +84,8 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
                         Update time: {currentUser.update_time} <br/><br/>
                         Profile picture: {currentUser.profile_pic} <br/><br/>
                     </p>
-                </div>
-                <div style={{margin: 5,  flex: 1}}>
+                </InfoContainer>
+                <InfoContainer>
                     <p>
                         Last login: {currentUser.last_login == null ? "Never" : currentUser.last_login}<br/><br/>
                         Admin type: {currentUser.admin_type} <br/><br/>
@@ -63,8 +93,8 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
                         Active: {currentUser.is_active ? "Yes" : "No"} <br/><br/>
                         Staff: {currentUser.is_staff ? "Yes" : "No"}
                     </p>
-                </div>
-            </div>
+                </InfoContainer>
+            </FlexContainer>
             <p>
                 Groups: <br/>{currentUser.groups.length === 0 ? "None" : currentUser.groups.toString()}<br/><br/>
             </p>
@@ -72,7 +102,7 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
                 Problems: <br/> {currentUser.solved_problem.length === 0 ? "None" : currentUser.solved_problem.toString()} <br/><br/>
                 User permissions: <br/> {currentUser.user_permissions.length == 0 ? "None" : currentUser.user_permissions.toString()}
             </p>
-        </div>
+        </Container>
     </div>);
 }
 
