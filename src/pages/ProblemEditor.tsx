@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import styles from '../styles';
 import { Problem, User, getProblem } from '../models';
 import styled from 'styled-components';
 

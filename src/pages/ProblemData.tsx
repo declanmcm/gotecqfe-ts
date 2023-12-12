@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import styles from '../styles';
 import { Problem } from '../models';
 import styled from 'styled-components';
 

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import styles from '../styles';
 import { AuthResponse } from '../models';
 import styled from 'styled-components';
 
@@ -36,6 +35,13 @@ const Form = styled.form`
     margin: auto;
     margin-top: 50px;
     font-size: 24px;
+`;
+
+const Input = styled.input`
+    margin: 8px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
 `;
 
 const Button = styled.button`
@@ -96,23 +102,21 @@ function JudgeAuth() {
                 </Heading>
                 <Form>
                     <label htmlFor="username">Username:</label>
-                    <input
+                    <Input
                     type="text"
                     id="username"
                     placeholder="Enter your username"
-                    style={styles.inputStyle}
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e : any) => setUsername(e.target.value)}
                     />
 
                     <label htmlFor="password">Password:</label>
-                    <input
+                    <Input
                     type="password"
                     id="password"
                     placeholder="Enter your password"
-                    style={styles.inputStyle}
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e : any) => setPassword(e.target.value)}
                     />
                     {failedLogin ? <RedText>Incorrect username or password</RedText> : null}
 

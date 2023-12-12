@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import styles from '../styles';
 import styled from 'styled-components';
 
 const Heading = styled.h1`
@@ -17,6 +16,15 @@ const ButtonContainer = styled.div`
     padding-right: 810px;
 `;
 
+const Button = styled.button`
+    font-size: 30px;
+    background-color: var(--Button-colour);
+    color: var(--text-dark);
+    font-family: Helvetica, sans-serif;
+    border-radius: 8px;
+    padding: 8px;
+`;
+
 function JudgeApp() { 
 
     const navigate = useNavigate();
@@ -28,9 +36,9 @@ function JudgeApp() {
                     Welcome
                 </Heading>
                 <ButtonContainer>
-                    <button style={styles.buttonStyleApp} onClick={() => navigate('/judge-manager/app/user')}>See users</button>
-                    <button style={styles.buttonStyleApp} onClick={() => navigate('/judge-manager/app/problem/all')}>See problems</button>
-                    <button style={styles.buttonStyleApp} onClick={() => navigate('/judge-manager/auth')}>Logout</button>
+                    <Button onClick={() => navigate('/judge-manager/app/user')}>See users</Button>
+                    <Button onClick={() => navigate('/judge-manager/app/problem/all')}>See problems</Button>
+                    <Button onClick={() => navigate('/judge-manager/auth')}>Logout</Button>
                 </ButtonContainer>
             </div>
         </div>

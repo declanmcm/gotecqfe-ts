@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from '../components/Header';
-import styles from '../styles';
 import { UserData, ProblemData, ProblemEditor } from '.';
 import ReactDOM from "react-dom";
 import "../modalStyle.css";
