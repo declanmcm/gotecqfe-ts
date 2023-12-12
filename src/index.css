@@ -15,6 +15,7 @@ code {
 :root {
   --panel-colour: #9ccbd9;
   --item-colour: #b3b5b4;
+  --alt-item-colour: #99b6a7;
   --border-colour: grey;
   --text-light: white;
   --text-dark: black;

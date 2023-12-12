@@ -77,6 +77,13 @@ const Item = styled.div`
     margin: 15px;
 `;
 
+const ItemNewColour = styled.div`
+    border-style: solid;
+    background: var(--alt-item-colour);
+    border-radius: 10px;
+    margin: 15px;
+`;
+
 const ItemText = styled.div`
     font-size: 22px;
     user-select: none;
@@ -281,7 +288,6 @@ function List({ type }: ListProps) {
                                 <SmallButton onClick={() => {if (totalPages) handlePageChange(totalPages)}}>Last</SmallButton>
                             </div>
                         </Panel>
-
                         
                         <PanelLarge>
                             {currentItem == null || (type === 'user' && 'is_superuser' in currentItem && currentItem.is_superuser == null) ? (<h1>No item selected</h1>) : (<div>{'is_superuser' in currentItem ? <UserData currentUser={currentItem} hidden={hidden} setHidden={setHidden} items={items as Array<User>} setFilteredItems={setFilteredItems} /> : <ProblemData problem={currentItem} hidden={hidden} setHidden={setHidden} />}</div>)}
@@ -290,10 +296,10 @@ function List({ type }: ListProps) {
                                 <h1>Submissions</h1>
                                 {currentItem != null && submissions != null ? 'username' in currentItem ? (submissions
                                                                                                                                 .filter(submission => submission.author_name === currentItem.username)
-                                                                                                                                .map(submission => {return <p>{submission.problem_title}</p>})) : 
+                                                                                                                                .map(submission => {return <ItemNewColour><BoldText>{submission.problem_title}</BoldText> {submission.language}, {submission.submit_time.slice(0, 16)}, {submission.verdict}</ItemNewColour>})) : 
                                                                                                                     (submissions
                                                                                                                                 .filter(submission => submission.problem_title === currentItem.title)
-                                                                                                                                .map(submission => {return <p>{submission.author_name}</p>})) : null}
+                                                                                                                                .map(submission => {return <ItemNewColour><BoldText>{submission.author_name}</BoldText> {submission.language}, {submission.submit_time.slice(0, 16)}, {submission.verdict}</ItemNewColour>})) : null}
                             </PanelNewColour> : null}
                         </PanelLarge>
                     </Container>
