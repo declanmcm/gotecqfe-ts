@@ -35,7 +35,7 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
             <button style={styles.buttonStyleApp} onClick={findSimilar} > Find similar</button>
             <button style={styles.buttonStyleApp} onClick={toggleHidden}> {hidden ? 'Show' : 'Hide'} submission </button>
         </div>
-        {hidden === false ? <div style={{fontSize: '30px'}}>
+        <div style={{fontSize: '30px'}}>
             <div style={{display: 'flex', alignItems: 'stretch'}}>
                 <div style={{margin: 5, flex: 1}}>
                     <p>
@@ -72,7 +72,7 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
                 Problems: <br/> {currentUser.solved_problem.length === 0 ? "None" : currentUser.solved_problem.toString()} <br/><br/>
                 User permissions: <br/> {currentUser.user_permissions.length == 0 ? "None" : currentUser.user_permissions.toString()}
             </p>
-        </div> : null }
+        </div>
     </div>);
 }
 

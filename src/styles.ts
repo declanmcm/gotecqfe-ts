@@ -61,6 +61,24 @@ const styles: Record<string, React.CSSProperties> = {
         padding: 8
     },
 
+    smallButton : {
+        fontSize: '15px',
+        backgroundColor: '#80a1e8',
+        color: 'black',
+        fontFamily: 'Helvetica',
+        borderRadius: 4,
+        padding: 4
+    },
+
+    smallButtonActive: {
+        fontSize: '15px',
+        backgroundColor: '#2424c7',
+        color: 'white',
+        fontFamily: 'Helvetica',
+        borderRadius: 4,
+        padding: 4
+    },
+
     itemStyle : {
         flex: 1,
         textAlign: 'center',

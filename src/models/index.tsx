@@ -49,6 +49,37 @@ export const getUserList = () => {
     };
 }
 
+export type SubmissionList = ReturnType<typeof getSubmissionList>;
+export const getSubmissionList = () => {
+    return {
+        "data": [] as Submission[],
+        "total": 0,
+        "maxpage": 0,
+        "count": 0,
+        "error": ""
+    }
+}
+
+export type Submission = ReturnType<typeof getSubmission>;
+export const getSubmission = () => {
+    return {
+        "id": 0,
+        "problem_title": "",
+        "problem_disp_id": "",
+        "problem_id": 0,
+        "author_name": "",
+        "author_id": 0,
+        "is_visible": true,
+        "submit_time": "",
+        "content": "",
+        "language": "",
+        "verdict": "",
+        "output": {},
+        "time": 0,
+        "memory": 0
+    }
+}
+
 export type Problem = ReturnType<typeof getProblem>;
 export const getProblem = () => {
     return {
