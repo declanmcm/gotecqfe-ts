@@ -29,7 +29,7 @@ function ProblemData( { problem, hidden, setHidden } : ProblemDataProps) {
             <button style={styles.buttonStyleApp} onClick={() => navigate(`/judge-manager/app/problem/${problem.id}`) }> Edit problem</button>
             <button style={styles.buttonStyleApp} onClick={toggleHidden}> {hidden ? 'Show' : 'Hide'} submission </button>
         </div>
-        {hidden === false ? <div style={{fontSize: '30px'}}>
+        <div style={{fontSize: '30px'}}>
             <div style={{display: 'flex', alignItems: 'stretch'}}>
                 <div style={{margin: 5, flex: 1}}>
                     <p>
@@ -64,7 +64,7 @@ function ProblemData( { problem, hidden, setHidden } : ProblemDataProps) {
                 Question: <br/>{problem.statement}<br/><br/>
                 Statistic info: {problem.statistic_info.toString()}
             </p>
-        </div> : null}
+        </div>
     </div>);
 }
 

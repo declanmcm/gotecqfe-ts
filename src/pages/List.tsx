@@ -56,10 +56,10 @@ function List({ type }: ListProps) {
 
     useEffect(() => {
         let storedToken = window.localStorage.getItem('token');
-        if (storedToken == '') navigate('/judge-manager/auth');
+        if (storedToken === '') navigate('/judge-manager/auth');
 
         const fetchData = async () => {
-            let data = null as null | SubmissionList;
+            let data = null as null | SubmissionList | ExpiredTokenResponse;
             try {
                 const response = await fetch(url + 'admin/status', {
                     method: "GET",
@@ -70,9 +70,10 @@ function List({ type }: ListProps) {
                     }
                 });
                 data = await response.json();
+                if ((data && 'detail' in data && data.detail === "Invalid token") || (data && 'detail' in data && data.detail === "Token has expired")) navigate('/judge-manager/auth');
                 console.log("Submission data: ");
                 console.log(data);
-                if (data) setSubmissions(data.data);
+                if (data && 'data' in data) setSubmissions(data.data);
             } catch (error) {
                 console.log(error);
             }
@@ -187,6 +188,7 @@ function List({ type }: ListProps) {
                             </div>
                         </div>
 
+                        
                         <div style={{
                             flex: 3,
                             textAlign: 'center',
@@ -198,7 +200,7 @@ function List({ type }: ListProps) {
                             margin: 15
                         }}>
                             {currentItem == null || (type === 'user' && 'is_superuser' in currentItem && currentItem.is_superuser == null) ? (<h1>No item selected</h1>) : (<div>{'is_superuser' in currentItem ? <UserData currentUser={currentItem} hidden={hidden} setHidden={setHidden} items={items as Array<User>} setFilteredItems={setFilteredItems} /> : <ProblemData problem={currentItem} hidden={hidden} setHidden={setHidden} />}</div>)}
-
+                            {!hidden ? 
                             <div style={{
                                 textAlign: 'center',
                                 fontSize: '32px',
@@ -209,13 +211,13 @@ function List({ type }: ListProps) {
                                 margin: 15
                             }}>
                                 <h1>Submissions</h1>
-                                {!hidden && currentItem != null && submissions != null ? 'username' in currentItem ? (submissions
+                                {currentItem != null && submissions != null ? 'username' in currentItem ? (submissions
                                                                                                                                 .filter(submission => submission.author_name === currentItem.username)
                                                                                                                                 .map(submission => {return <p>{submission.problem_title}</p>})) : 
                                                                                                                     (submissions
                                                                                                                                 .filter(submission => submission.problem_title === currentItem.title)
                                                                                                                                 .map(submission => {return <p>{submission.author_name}</p>})) : null}
-                            </div>
+                            </div> : null}
                         </div>
                     </div>
                 </div>}
