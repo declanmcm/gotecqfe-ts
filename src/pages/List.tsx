@@ -77,9 +77,15 @@ const Item = styled.div`
     margin: 15px;
 `;
 
-const ItemText = styled.p`
+const ItemText = styled.div`
     font-size: 22px;
     user-select: none;
+    padding: 16px;
+`;
+
+const BoldText = styled.p`
+    font-weight: bold;
+    margin: 10px;
 `;
 
 const SmallButton = styled.button`
@@ -247,7 +253,7 @@ function List({ type }: ListProps) {
                                 if (currentItem != null && currentItem.id === item.id) ItemType = SelectedItem;
                                 else ItemType = Item;
                                 return <ItemType onClick={() => setCurrentItem(item)}>
-                                    <ItemText>{type === 'user' && 'username' in item ? item.username : 'title' in item ? item.title : null}</ItemText>
+                                        {type === 'user' && 'username' in item ? <ItemText><BoldText>{item.username}</BoldText> Joined with email {item.email} on {item.create_time.slice(0, 10)} </ItemText> : 'title' in item ? <ItemText><BoldText>{item.title}</BoldText> Created on {item.created.slice(0, 10)} by {item.author_name}</ItemText> : null}
                                 </ItemType>
                             })) : <div>{items != null ?
                                 (items.map(item => {
@@ -255,7 +261,7 @@ function List({ type }: ListProps) {
                                     if (currentItem != null && currentItem.id === item.id) ItemType = SelectedItem;
                                     else ItemType = Item;
                                     return <ItemType onClick={() => setCurrentItem(item)}>
-                                        <ItemText>{type === 'user' && 'username' in item ? item.username : 'title' in item ? item.title : null}</ItemText>
+                                        {type === 'user' && 'username' in item ? <ItemText><BoldText>{item.username}</BoldText> Joined with email {item.email} on {item.create_time.slice(0, 10)} </ItemText> : 'title' in item ? <ItemText><BoldText>{item.title}</BoldText> Created on {item.created.slice(0, 10)} by {item.author_name}</ItemText> : null}
                                     </ItemType>
                                 })) : null}</div>}
                             <div>
