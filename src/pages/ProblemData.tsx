@@ -10,26 +10,26 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-    font-size: 30px;
+    font-size: 24px;
     background-color: var(--button-colour);
-    color: black;
+    color: var(--text-light);
     font-family: Helvetica, sans-serif;
-    border-radius: 8;
-    padding: 8;
+    border-radius: 4px;
+    padding: 8px;
 `;
 
 const TextContainer = styled.div`
     font-size: 30px;
 `;
 
-const Container = styled.div`
-    display: flex;
+const GridContainer = styled.div`
+    display: grid;
     align-items: stretch;
+    grid-template-columns: repeat(auto-fill, 300px);
 `;
 
-const FlexContainer = styled.div`
-    margin: 5px;
-    flex: 1;
+const Text = styled.p`
+    font-size: 25px;
 `;
 
 type ProblemDataProps = {
@@ -59,40 +59,28 @@ function ProblemData( { problem, hidden, setHidden } : ProblemDataProps) {
             <Button onClick={toggleHidden}> {hidden ? 'Show' : 'Hide'} submission </Button>
         </ButtonContainer>
         <TextContainer>
-            <Container>
-                <FlexContainer>
-                    <p>
-                        ID: {problem.id} <br/><br/>
-                        Display ID: {problem.display_id} <br/><br/>
-                        Author ID: {problem.author_id} <br/><br/>
-                        Author Name: {problem.author_name}<br/><br/>
-                        Time limit: {problem.time_limit} <br/><br/>
-                        Memory limit: {problem.memory_limit} <br/><br/>
-                    </p>
-                </FlexContainer>
-                <FlexContainer>
-                    <p>
-                        Created: {problem.created} <br/><br/>
-                        Difficulty: {problem.difficulty} <br/><br/>
-                        Visible: {problem.is_visible ? "Yes" : "No"} <br/><br/>
-                        Total submissions: {problem.total_submission} <br/><br/>
-                        Correct submissions: {problem.correct_submission} <br/><br/>
-                    </p>
-                </FlexContainer>
-                <FlexContainer>
-                    <p>
-                        Time limit: {problem.time_limit}<br/><br/>
-                        Tags: {problem.tags.toString()}<br/><br/>
-                        Source: {problem.source}<br/><br/>
-                        Sample test: {problem.sample_test.toString()}<br/><br/>
-                        Test zip: {problem.test_zip ? problem.test_zip : "None"}
-                    </p>
-                </FlexContainer>
-            </Container>
-            <p>
+            <GridContainer>
+                <Text>ID: {problem.id} </Text>
+                <Text>Display ID: {problem.display_id} </Text>
+                <Text>Author ID: {problem.author_id}</Text>
+                <Text>Author Name: {problem.author_name}</Text>
+                <Text>Time limit: {problem.time_limit} </Text>
+                <Text>Memory limit: {problem.memory_limit} </Text>
+                <Text>Created: {problem.created} </Text>
+                <Text>Difficulty: {problem.difficulty} </Text>
+                <Text>Visible: {problem.is_visible ? "Yes" : "No"} </Text>
+                <Text>Total submissions: {problem.total_submission} </Text>
+                <Text>Correct submissions: {problem.correct_submission} </Text>
+                <Text>Time limit: {problem.time_limit}</Text>
+                <Text>Tags: {problem.tags.toString()}</Text>
+                <Text>Source: {problem.source}</Text>
+                <Text>Sample test: {problem.sample_test.toString()}</Text>
+                <Text>Test zip: {problem.test_zip ? problem.test_zip : "None"} </Text>
+            </GridContainer>
+            <Text>
                 Question: <br/>{problem.statement}<br/><br/>
                 Statistic info: {problem.statistic_info.toString()}
-            </p>
+            </Text>
         </TextContainer>
     </div>);
 }

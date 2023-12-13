@@ -17,6 +17,8 @@ const Loading = styled.p`
 const Container = styled.div`
     display: flex;
     flex-direction: row;
+    padding: 15px;
+    gap: 15px;
 `;
 
 const Panel = styled.div`
@@ -27,18 +29,16 @@ const Panel = styled.div`
     border-radius: 10px;
     border-color: var(--border-colour);
     background: var(--panel-colour);
-    margin: 15px;
 `;
 
 const PanelLarge = styled.div`
     flex: 3;
     text-align: center;
-    font-size: 32px;
+    font-size: 26px;
     border-style: solid;
     border-radius: 10px;
     border-color: var(--border-colour);
     background: var(--panel-colour);
-    margin: 15px;
 `;
 
 const PanelNewColour = styled.div`
@@ -51,10 +51,15 @@ const PanelNewColour = styled.div`
     margin: 15px;
 `;
 
+const GridContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 440px);
+`;
+
 const AppButton = styled.button`
     font-size: 30px;
     background-color: var(--button-colour);
-    color: var(--text-dark);
+    color: var(--text-light);
     font-family: Helvetica;
     border-radius: 8px;
     padding: 8px;
@@ -72,14 +77,14 @@ const SelectedItem = styled.div`
 const Item = styled.div`
     border-style: solid;
     background: var(--item-colour);
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 15px;
 `;
 
 const ItemNewColour = styled.div`
     border-style: solid;
     background: var(--alt-item-colour);
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 15px;
 `;
 
@@ -97,9 +102,9 @@ const BoldText = styled.p`
 const SmallButton = styled.button`
     font-size: 15px;
     background-color: var(--button-colour);
-    color: var(--text-dark);
+    color: var(--text-light);
     font-family: Helvetica;
-    border-radius: 4px;
+    border-radius: 3px;
     padding: 4px;
 `;
 
@@ -108,8 +113,13 @@ const SmallButtonActive = styled.button`
     background-color: var(--selected-colour);
     color: var(--text-light);
     font-family: Helvetica;
-    border-radius: 4px;
+    border-radius: 3px;
     padding: 4px;
+`;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: space-around;
 `;
 
 type ListProps = {
@@ -270,7 +280,7 @@ function List({ type }: ListProps) {
                                         {type === 'user' && 'username' in item ? <ItemText><BoldText>{item.username}</BoldText> Joined with email {item.email} on {item.create_time.slice(0, 10)} </ItemText> : 'title' in item ? <ItemText><BoldText>{item.title}</BoldText> Created on {item.created.slice(0, 10)} by {item.author_name}</ItemText> : null}
                                     </ItemType>
                                 })) : null}</div>}
-                            <div>
+                            <ButtonContainer>
                                 <SmallButton onClick={() => handlePageChange(1)}>First</SmallButton>
                                 <SmallButton onClick={() => handlePageChange(currentPage - 1)}>Previous</SmallButton>
                                 {surroundingPages && surroundingPages[0] != 1 ?
@@ -285,7 +295,7 @@ function List({ type }: ListProps) {
                                 <SmallButton>...</SmallButton> : null}
                                 <SmallButton onClick={() => handlePageChange(currentPage + 1)}>Next</SmallButton>
                                 <SmallButton onClick={() => {if (totalPages) handlePageChange(totalPages)}}>Last</SmallButton>
-                            </div>
+                            </ButtonContainer>
                         </Panel>
                         
                         <PanelLarge>
@@ -293,12 +303,14 @@ function List({ type }: ListProps) {
                             {!hidden ? 
                             <PanelNewColour>
                                 <h1>Submissions</h1>
+                                <GridContainer>
                                 {currentItem != null && submissions != null ? 'username' in currentItem ? (submissions
                                                                                                                                 .filter(submission => submission.author_name === currentItem.username)
                                                                                                                                 .map(submission => {return <ItemNewColour><BoldText>{submission.problem_title}</BoldText> {submission.language}, {submission.submit_time.slice(0, 16)}, {submission.verdict}</ItemNewColour>})) : 
                                                                                                                     (submissions
                                                                                                                                 .filter(submission => submission.problem_title === currentItem.title)
                                                                                                                                 .map(submission => {return <ItemNewColour><BoldText>{submission.author_name}</BoldText> {submission.language}, {submission.submit_time.slice(0, 16)}, {submission.verdict}</ItemNewColour>})) : null}
+                                </GridContainer>
                             </PanelNewColour> : null}
                         </PanelLarge>
                     </Container>

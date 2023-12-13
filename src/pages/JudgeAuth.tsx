@@ -25,6 +25,7 @@ const Heading = styled.div`
     font-style: oblique;
     color: black;
     font-size: 68px;
+    margin-top: 40px;
 `;
 
 const Form = styled.form`
@@ -47,8 +48,8 @@ const Input = styled.input`
 const Button = styled.button`
     background-color: var(--button-colour);
     color: white;
-    padding: 10;
-    margin: 10;
+    padding: 10px;
+    margin: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;

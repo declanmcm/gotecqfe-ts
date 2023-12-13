@@ -9,11 +9,11 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-    font-size: 30px;
+    font-size: 24px;
     background-color: var(--button-colour);
-    color: var(--text-dark);
+    color: var(--text-light);
     font-family: Helvetica, sans-serif;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 8px;
 `;
 
@@ -21,14 +21,15 @@ const Container = styled.div`
     font-size: 30px;
 `;
 
-const FlexContainer = styled.div`
-    display: flex;
+const GridContainer = styled.div`
+    display: grid;
     align-items: stretch;
+    grid-template-columns: repeat(auto-fill, 300px);
 `;
 
-const InfoContainer = styled.div`
-    margin: 5px;
-    flex: 1;
+
+const Text = styled.p`
+    font-size: 25px;
 `;
 
 type UserDataProps = {
@@ -65,42 +66,30 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
             <Button onClick={toggleHidden}> {hidden ? 'Show' : 'Hide'} submission </Button>
         </ButtonContainer>
         <Container>
-            <FlexContainer>
-                <InfoContainer>
-                    <p>
-                        Username: {currentUser.username} <br/><br/>
-                        Full name: {currentUser.first_name && currentUser.last_name ? currentUser.first_name + currentUser.last_name : "None"} <br/><br/>
-                        ID: {currentUser.id} <br/><br/>
-                        Superuser: {currentUser.is_superuser ? "Yes" : "No"}
-                    </p>
-                </InfoContainer>
-                <InfoContainer>
-                    <p>
-                        Verified: {currentUser.is_verified ? "Yes" : "No"} <br/><br/>
-                        Email: {currentUser.email} <br/><br/>
-                        Password: {currentUser.password} <br/><br/>
-                        Create time: {currentUser.create_time} <br/><br/>
-                        Update time: {currentUser.update_time} <br/><br/>
-                        Profile picture: {currentUser.profile_pic} <br/><br/>
-                    </p>
-                </InfoContainer>
-                <InfoContainer>
-                    <p>
-                        Last login: {currentUser.last_login == null ? "Never" : currentUser.last_login}<br/><br/>
-                        Admin type: {currentUser.admin_type} <br/><br/>
-                        Problem permission: {currentUser.problem_permission} <br/><br/>
-                        Active: {currentUser.is_active ? "Yes" : "No"} <br/><br/>
-                        Staff: {currentUser.is_staff ? "Yes" : "No"}
-                    </p>
-                </InfoContainer>
-            </FlexContainer>
-            <p>
+            <GridContainer>
+                <Text>Username: {currentUser.username}</Text>
+                <Text>Full name: {currentUser.first_name && currentUser.last_name ? currentUser.first_name + currentUser.last_name : "None"} </Text>
+                <Text>ID: {currentUser.id} </Text>
+                <Text>Superuser: {currentUser.is_superuser ? "Yes" : "No"}</Text>
+                <Text> Verified: {currentUser.is_verified ? "Yes" : "No"} </Text>
+                <Text>Email: {currentUser.email} </Text>
+                <Text>Password: {currentUser.password} </Text>
+                <Text>Create time: {currentUser.create_time}</Text>
+                <Text>Update time: {currentUser.update_time} </Text>
+                <Text>Profile picture: {currentUser.profile_pic} </Text>
+                <Text>Last login: {currentUser.last_login == null ? "Never" : currentUser.last_login}</Text>
+                <Text>Admin type: {currentUser.admin_type} </Text>
+                <Text>Problem permission: {currentUser.problem_permission} </Text>
+                <Text>Active: {currentUser.is_active ? "Yes" : "No"} </Text>
+                <Text>Staff: {currentUser.is_staff ? "Yes" : "No"}</Text>
+            </GridContainer>
+            <Text>
                 Groups: <br/>{currentUser.groups.length === 0 ? "None" : currentUser.groups.toString()}<br/><br/>
-            </p>
-            <p>
+            </Text>
+            <Text>
                 Problems: <br/> {currentUser.solved_problem.length === 0 ? "None" : currentUser.solved_problem.toString()} <br/><br/>
                 User permissions: <br/> {currentUser.user_permissions.length == 0 ? "None" : currentUser.user_permissions.toString()}
-            </p>
+            </Text>
         </Container>
     </div>);
 }

@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const Button = styled.button`
     font-size: 30px;
     background-color: var(--button-colour);
-    color: var(--text-dark);
+    color: var(--text-light);
     font-family: Helvetica;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 8px;
 `;
 

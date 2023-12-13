@@ -13,13 +13,14 @@ code {
 }
 
 :root {
-  --panel-colour: #9ccbd9;
-  --item-colour: #b3b5b4;
+  --background-colour: #e0ebeb;
+  --panel-colour: #5dacbd;
+  --item-colour: #a7bcb9;
   --alt-item-colour: #99b6a7;
   --border-colour: grey;
-  --text-light: white;
+  --text-light: #e0ebeb;
   --text-dark: black;
-  --button-colour: #80a1e8;
+  --button-colour: #24527a;
   --selected-colour: #2424c7;
   --auth-container-colour: #e5f2dc;
   --text-error: red;
