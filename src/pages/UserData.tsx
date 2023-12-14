@@ -48,7 +48,6 @@ function UserData( { currentUser, hidden, setHidden, items, setFilteredItems } :
 
     useEffect(() => {
         let storedHidden = window.localStorage.getItem('hidden');
-        console.log(storedHidden);
         setHidden(storedHidden !== "true");
     });
 
