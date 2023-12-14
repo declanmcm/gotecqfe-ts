@@ -20,19 +20,19 @@ const Fieldset = styled.fieldset`
     width: 65%;
     margin: auto;
     margin-top: 50px;
-    font-size: 24px;
+    font-size: var(--text-3x);
     border-radius: 10px;
 `;
 
 const Input = styled.input`
     width: 40%;
-    font-size: 24px;
+    font-size: var(--text-3x);
 `;
 
 const TextArea = styled.textarea`
     width: 75%;
     height: 150px;
-    font-size: 18px;
+    font-size: var(--text-lg);
 `;
 
 const TextAreaSmall = styled.textarea`
@@ -46,7 +46,7 @@ const ButtonContainer = styled.div`
 `;
 
 const RedText = styled.p`
-    font-size: 20px;
+    font-size: var(--text-xl);
     color: var(--text-error);
 `;
 

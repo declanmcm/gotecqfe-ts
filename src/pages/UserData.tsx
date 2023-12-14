@@ -9,7 +9,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-    font-size: 24px;
+    font-size: var(--text-3x);
     background-color: var(--button-colour);
     color: var(--text-light);
     font-family: Helvetica, sans-serif;
@@ -18,7 +18,7 @@ const Button = styled.button`
 `;
 
 const Container = styled.div`
-    font-size: 30px;
+    font-size: var(--text-xl);
 `;
 
 const GridContainer = styled.div`
@@ -29,7 +29,7 @@ const GridContainer = styled.div`
 
 
 const Text = styled.p`
-    font-size: 25px;
+    font-size: var(--text-3x);
 `;
 
 type UserDataProps = {

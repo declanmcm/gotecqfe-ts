@@ -25,7 +25,7 @@ const Container = styled.div`
 const Panel = styled.div`
     flex: 1;
     text-align: center;
-    font-size: 32px;
+    font-size: var(--text-7x);
     border-style: solid;
     border-radius: 10px;
     border-color: var(--border-colour);
@@ -35,7 +35,7 @@ const Panel = styled.div`
 const PanelLarge = styled.div`
     flex: 3;
     text-align: center;
-    font-size: 26px;
+    font-size: var(--text-4x);
     border-style: solid;
     border-radius: 10px;
     border-color: var(--border-colour);
@@ -44,7 +44,7 @@ const PanelLarge = styled.div`
 
 const PanelNewColour = styled.div`
     text-align: center;
-    font-size: 32px;
+    font-size: var(--text-7x);
     border-style: solid;
     border-radius: 10px;
     border-color: var(--border-colour);
@@ -58,7 +58,7 @@ const GridContainer = styled.div`
 `;
 
 const AppButton = styled.button`
-    font-size: 30px;
+    font-size: var(--text-6x);
     background-color: var(--button-colour);
     color: var(--text-light);
     font-family: Helvetica;
@@ -90,7 +90,7 @@ const ItemNewColour = styled.div`
 `;
 
 const ItemText = styled.div`
-    font-size: 22px;
+    font-size: var(--text-2x);
     user-select: none;
     padding: 16px;
 `;

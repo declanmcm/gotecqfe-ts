@@ -17,7 +17,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-    font-size: 30px;
+    font-size: var(--text-6x);
     background-color: var(--Button-colour);
     color: var(--text-dark);
     font-family: Helvetica, sans-serif;

@@ -25,4 +25,16 @@ code {
   --auth-container-colour: #e5f2dc;
   --text-error: red;
   --text-form: #4f4e4e;
+  
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2x: 22px;
+  --text-3x: 24px;
+  --text-4x: 26px;
+  --text-5x: 28px;
+  --text-6x: 30px;
+  --text-7x: 32px;
 }
