@@ -21,10 +21,14 @@ code {
   --text-light: #e0ebeb;
   --text-dark: black;
   --button-colour: #24527a;
+  --button-hover: #3676ae;
+  --button-active-hover: #7777f4;
   --selected-colour: #2424c7;
+  --item-hover-colour: #2c72c8;
   --auth-container-colour: #e5f2dc;
   --text-error: red;
   --text-form: #4f4e4e;
+  --header-color: #5d84bd;
   
   --text-xs: 12px;
   --text-sm: 14px;

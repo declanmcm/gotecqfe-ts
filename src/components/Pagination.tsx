@@ -22,6 +22,17 @@ const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-around;
     padding-bottom: 10px;
+    cursor: pointer;
+`;
+
+const Wrapper = styled.div`
+  &:hover ${SmallButton} {
+    background-color: var(--button-hover);
+  }
+
+  &:hover ${SmallButtonActive} {
+    background-color: var(--button-active-hover);
+  }
 `;
 
 type PaginationProps = {
@@ -31,28 +42,36 @@ type PaginationProps = {
     totalPages: number | null;
 }
 
-export default function Pagination( { setCurrentPage, currentPage, surroundingPages, totalPages } : PaginationProps) {
+export default function Pagination({ setCurrentPage, currentPage, surroundingPages, totalPages }: PaginationProps) {
 
-    function handlePageChange(newPage : number) {
+    function handlePageChange(newPage: number) {
         if (newPage < 1) newPage = 0;
         else if (totalPages && newPage > totalPages) newPage = totalPages;
         setCurrentPage(newPage);
     }
 
     return (<ButtonContainer>
+        <Wrapper>
         <SmallButton onClick={() => handlePageChange(1)}>First</SmallButton>
+        </Wrapper>
+        <Wrapper>
         <SmallButton onClick={() => handlePageChange(currentPage - 1)}>Previous</SmallButton>
+        </Wrapper>
         {surroundingPages && surroundingPages[0] != 1 ?
-        <SmallButton>...</SmallButton> : null}
+            <Wrapper><SmallButton>...</SmallButton></Wrapper>: null}
         {surroundingPages != null ?
-        (surroundingPages.map(page => {
-            let ButtonType = SmallButton;
-            if (page === currentPage) ButtonType = SmallButtonActive;
-            return <ButtonType onClick={() => handlePageChange(page)}>{page}</ButtonType>;
-        })) : null}
+            (surroundingPages.map(page => {
+                let ButtonType = SmallButton;
+                if (page === currentPage) ButtonType = SmallButtonActive;
+                return <Wrapper><ButtonType onClick={() => handlePageChange(page)}>{page}</ButtonType></Wrapper>;
+            })) : null}
         {surroundingPages && surroundingPages[surroundingPages.length - 1] != totalPages ?
-        <SmallButton>...</SmallButton> : null}
+            <Wrapper><SmallButton>...</SmallButton></Wrapper> : null}
+            <Wrapper>
         <SmallButton onClick={() => handlePageChange(currentPage + 1)}>Next</SmallButton>
-        <SmallButton onClick={() => {if (totalPages) handlePageChange(totalPages)}}>Last</SmallButton>
+        </Wrapper>
+        <Wrapper>
+        <SmallButton onClick={() => { if (totalPages) handlePageChange(totalPages) }}>Last</SmallButton>
+        </Wrapper>
     </ButtonContainer>);
 }
