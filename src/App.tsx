@@ -12,9 +12,20 @@ function App() {
       />
       <Route path="/judge-manager/app" element={<JudgeApp />} />
       <Route path="/judge-manager/auth" element={<JudgeAuth />} />
-      <Route path="/judge-manager/app/user" element={<List type="user" />} />
+      <Route
+        path="/judge-manager/app/user/:id"
+        element={<List type="user" />}
+      />
       <Route
         path="/judge-manager/app/problem/:id"
+        element={<List type="problem" />}
+      />
+      <Route
+        path="/judge-manager/app/user"
+        element={<List type="user" />}
+      />
+      <Route
+        path="/judge-manager/app/problem"
         element={<List type="problem" />}
       />
     </Routes>

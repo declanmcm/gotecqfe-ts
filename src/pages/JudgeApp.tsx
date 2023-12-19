@@ -32,7 +32,7 @@ const JudgeAppContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`
+`;
 
 function JudgeApp() {
   const navigate = useNavigate();
@@ -41,20 +41,20 @@ function JudgeApp() {
     <JudgeAppContainer>
       <Heading>Welcome</Heading>
       <ButtonContainer>
-      <Wrapper>
-        <Button onClick={() => navigate("/judge-manager/app/user")}>
-          See users
-        </Button>
-        </Wrapper>
-      <Wrapper>
-        <Button onClick={() => navigate("/judge-manager/app/problem/all")}>
-          See problems
-        </Button>
+        <Wrapper>
+          <Button onClick={() => navigate("/judge-manager/app/user")}>
+            See users
+          </Button>
         </Wrapper>
         <Wrapper>
-        <Button onClick={() => navigate("/judge-manager/auth")}>
-          Logout
-        </Button>
+          <Button onClick={() => navigate("/judge-manager/app/problem")}>
+            See problems
+          </Button>
+        </Wrapper>
+        <Wrapper>
+          <Button onClick={() => navigate("/judge-manager/auth")}>
+            Logout
+          </Button>
         </Wrapper>
       </ButtonContainer>
     </JudgeAppContainer>
