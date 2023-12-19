@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { User, Problem } from "../models";
 import styled from "styled-components";
+import { BaseButton } from "../components/styled";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -9,14 +10,9 @@ const ButtonContainer = styled.div`
   gap: 15px;
 `;
 
-const Button = styled.button`
+const Button = styled(BaseButton)`
   font-size: var(--text-3x);
-  background-color: var(--button-colour);
-  color: var(--text-light);
-  font-family: Helvetica, sans-serif;
   border-radius: 4px;
-  padding: 8px;
-  cursor: pointer;
 `;
 
 const Container = styled.div`

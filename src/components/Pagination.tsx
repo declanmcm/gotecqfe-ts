@@ -1,32 +1,25 @@
 import styled from 'styled-components';
+import { BaseButton } from './styled';
 
-const SmallButton = styled.button`
+const SmallButton = styled(BaseButton)`
     font-size: 15px;
-    background-color: var(--button-colour);
-    color: var(--text-light);
-    font-family: Helvetica;
     border-radius: 3px;
     padding: 4px;
-    cursor: pointer;
 `;
 
-const SmallButtonActive = styled.button`
-    font-size: 15px;
+const SmallButtonActive = styled(SmallButton)`
     background-color: var(--selected-colour);
-    color: var(--text-light);
-    font-family: Helvetica;
-    border-radius: 3px;
-    padding: 4px;
-    cursor: pointer;
 `;
 
 const ButtonContainer = styled.div`
     display: flex;
-    justify-content: space-around;
+    gap: 10px;
     padding-bottom: 10px;
+    justify-content: center;
 `;
 
 const Wrapper = styled.div`
+  font-size: 0;
   &:hover ${SmallButton} {
     background-color: var(--button-hover);
   }
@@ -46,7 +39,7 @@ type PaginationProps = {
 export default function Pagination({ setCurrentPage, currentPage, surroundingPages, totalPages }: PaginationProps) {
 
     function handlePageChange(newPage: number) {
-        if (newPage < 1) newPage = 0;
+        if (newPage < 1) newPage = 1;
         else if (totalPages && newPage > totalPages) newPage = totalPages;
         setCurrentPage(newPage);
     }

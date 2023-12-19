@@ -20,8 +20,9 @@ code {
   --border-colour: grey;
   --text-light: #e0ebeb;
   --text-dark: black;
-  --button-colour: #24527a;
-  --button-hover: #3676ae;
+  --button-colour: #4b8ac1;
+  --button-hover: #599ad2;
+  --button-border-colour: #005096;
   --button-active-hover: #7777f4;
   --selected-colour: #2424c7;
   --item-hover-colour: #2c72c8;
