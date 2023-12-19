@@ -36,7 +36,7 @@ export default function Header({ text }: { text: string }) {
   function handleChange() {
     console.log(text);
     if (text === "User") navigate("/judge-manager/app/user");
-    else navigate("/judge-manager/app/problem/all");
+    else navigate("/judge-manager/app/problem");
   }
 
   return (

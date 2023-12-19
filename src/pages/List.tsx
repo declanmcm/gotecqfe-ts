@@ -209,7 +209,7 @@ function List({ type }: ListProps) {
     };
 
     fetchData();
-  }, [currentItem, navigate]);
+  }, [navigate]);
 
   useEffect(() => {
     let storedToken = window.localStorage.getItem("token");
