@@ -2,26 +2,42 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Problem, User, getProblem } from "../models";
 import styled from "styled-components";
+import { BaseButton } from "../components/styled";
 
 const Heading = styled.h1`
   text-align: center;
   font-family: Helvetica, sans-serif;
-  color: white;
-  font-size: 76px;
-  padding-top: 450px;
+  font-size: var(--text-7x);
+  margin: 15px;
 `;
 
+const FormContainer = styled.form`
+  width: 650px;
+  overflow-x: auto;
+`;
+const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const Fieldset = styled.fieldset`
-  display: block;
+  display: flex;
+  gap: 15px;
   flex-direction: column;
   font-family: Helvetica, sans-serif;
   color: var(--text-form);
-  align-items: left;
-  width: 65%;
-  margin: auto;
-  margin-top: 50px;
-  font-size: var(--text-3x);
-  border-radius: 10px;
+  font-size: var(--text-2x);
+  border: none;
+  div {
+    line-height: 1;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .hidden {
+    display: none;
+  }
 `;
 
 const Input = styled.input`
@@ -32,22 +48,21 @@ const Input = styled.input`
 const TextArea = styled.textarea`
   width: 75%;
   height: 150px;
-  font-size: var(--text-lg);
-`;
-
-const TextAreaSmall = styled.textarea`
-  width: 55%;
-  height: 150px;
+  font-size: var(--text-md);
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   align-items: space-between;
+  gap: 10px;
 `;
 
 const RedText = styled.p`
   font-size: var(--text-xl);
   color: var(--text-error);
+  &:empty {
+    display: none;
+  }
 `;
 
 type ProblemEditorProps = {
@@ -82,7 +97,7 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
       console.log(data);
 
       const response = await fetch(
-        "https://34.124.232.186:5000/admin/problem/" + toAppend,
+        "https://34.124.232.186:5000/admin/problem/" + toAppend + "/",
         {
           method: method,
           headers: {
@@ -108,9 +123,9 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
   }
 
   return (
-    <div>
+    <ModalContainer>
       <Heading>{id === "new" ? "Create new problem" : "Edit problem"}</Heading>
-      <form>
+      <FormContainer>
         <Fieldset>
           <div>
             <label>Display id</label>
@@ -147,7 +162,7 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
                 onChange={(e) =>
                   setProblem({ ...problem, statement: e.target.value })
                 }
-              ></TextArea>
+              />
             </div>
           </div>
           <div>
@@ -169,7 +184,7 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
           <div>
             <label>Source</label>
             <div>
-              <TextAreaSmall
+              <TextArea
                 value={
                   "source" in problem && problem.source ? problem.source : ""
                 }
@@ -177,13 +192,13 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
                 onChange={(e) =>
                   setProblem({ ...problem, source: e.target.value })
                 }
-              ></TextAreaSmall>
+              />
             </div>
           </div>
           <div>
             <label>Sample test</label>
             <div>
-              <TextAreaSmall
+              <TextArea
                 defaultValue={
                   "sample_test" in problem
                     ? JSON.stringify(problem.sample_test)
@@ -193,13 +208,13 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
                 onChange={(e) => {
                   setProblem({
                     ...problem,
-                    sample_test: JSON.parse(e.target.value) ?? "123123",
+                    sample_test: JSON.parse(e.target.value),
                   });
                 }}
               />
             </div>
           </div>
-          <div>
+          <div className="hidden">
             <label>Test zip</label>
             <div>
               <input
@@ -289,7 +304,7 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
           <div>
             <label>Statistic info</label>
             <div>
-              <textarea
+              <TextArea
                 defaultValue={
                   "sample_test" in problem
                     ? JSON.stringify(problem.sample_test)
@@ -307,15 +322,15 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
           </div>
           <div>
             <ButtonContainer>
-              <button
+              <BaseButton
                 onClick={(e) => {
                   e.preventDefault();
                   postProblem();
                 }}
               >
                 Save
-              </button>
-              <button
+              </BaseButton>
+              <BaseButton
                 onClick={(e) => {
                   e.preventDefault();
                   navigate("/judge-manager/app/problem/all");
@@ -323,13 +338,13 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
               >
                 {" "}
                 Close{" "}
-              </button>
+              </BaseButton>
             </ButtonContainer>
             <RedText>{error != null ? error : null}</RedText>
           </div>
         </Fieldset>
-      </form>
-    </div>
+      </FormContainer>
+    </ModalContainer>
   );
 }
 

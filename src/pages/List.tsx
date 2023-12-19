@@ -209,7 +209,7 @@ function List({ type }: ListProps) {
     };
 
     fetchData();
-  }, [currentItem, navigate]);
+  }, [navigate]);
 
   useEffect(() => {
     let storedToken = window.localStorage.getItem("token");
@@ -271,6 +271,7 @@ function List({ type }: ListProps) {
     setCurrentItem(item);
   };
   const formMode = searchParams.get('mode');
+  console.log("🚀 ~ file: List.tsx:274 ~ List ~ formMode:", formMode)
 
   return (
     <div id="modal-root">
@@ -432,7 +433,10 @@ function List({ type }: ListProps) {
       {(id != null && formMode) ? (
         <Modal
           child={
-            <ProblemEditor toEdit={formMode === "new" ? null : currentItem} id={id} />
+            <ProblemEditor
+              toEdit={formMode === "new" ? null : currentItem}
+              id={formMode === "new" ? "new" : id}
+            />
           }
         />
       ) : null}
