@@ -1,5 +1,5 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Header from "../components/Header";
 import { UserData, ProblemData, ProblemEditor } from ".";
 import ReactDOM from "react-dom";
@@ -211,6 +211,10 @@ function List({ type }: ListProps) {
     fetchData();
   }, [navigate]);
 
+  const activeItem = useCallback((item: User | Problem) => {
+    navigate(`/judge-manager/app/${type}/${item.id}`);
+    setCurrentItem(item);
+  }, [navigate, type]);
   useEffect(() => {
     let storedToken = window.localStorage.getItem("token");
     if (storedToken !== "") setToken(storedToken);
@@ -248,12 +252,12 @@ function List({ type }: ListProps) {
             (data.data as Array<User> | Array<Problem>).forEach(
               (item: User | Problem) => {
                 if (item.id === parseInt(id ? id : "0")) {
-                  setCurrentItem(item);
+                  activeItem(item);
                 }
               }
             );
           } else {
-            setCurrentItem(data.data[0]);
+            activeItem(data.data[0]);
           }
         }
       } catch (error) {
@@ -264,12 +268,8 @@ function List({ type }: ListProps) {
     if (storedToken !== "") {
       fetchData();
     }
-  }, [type, token, id, navigate, currentPage]);
+  }, [type, token, id, navigate, currentPage, activeItem]);
 
-  const activeItem = (item: User | Problem) => {
-    navigate(`/judge-manager/app/${type}/${item.id}`);
-    setCurrentItem(item);
-  };
   const formMode = searchParams.get('mode');
 
   return (
