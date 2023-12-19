@@ -7,6 +7,7 @@ const SmallButton = styled.button`
     font-family: Helvetica;
     border-radius: 3px;
     padding: 4px;
+    cursor: pointer;
 `;
 
 const SmallButtonActive = styled.button`
@@ -16,13 +17,13 @@ const SmallButtonActive = styled.button`
     font-family: Helvetica;
     border-radius: 3px;
     padding: 4px;
+    cursor: pointer;
 `;
 
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-around;
     padding-bottom: 10px;
-    cursor: pointer;
 `;
 
 const Wrapper = styled.div`
