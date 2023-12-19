@@ -15,6 +15,7 @@ import {
   ProblemResponse,
   ExpiredTokenResponse,
 } from "../models";
+import { BaseButton } from "../components/styled";
 
 const url = "https://34.124.232.186:5000/";
 
@@ -65,14 +66,8 @@ const GridContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
 `;
 
-const AppButton = styled.button`
+const AppButton = styled(BaseButton)`
   font-size: var(--text-6x);
-  background-color: var(--button-colour);
-  color: var(--text-light);
-  font-family: Helvetica;
-  border-radius: 8px;
-  padding: 8px;
-  cursor: pointer;
 `;
 
 const SelectedItem = styled.div`

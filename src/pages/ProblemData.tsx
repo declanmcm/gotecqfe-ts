@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Problem } from "../models";
 import styled from "styled-components";
-import { getNameOfDeclaration } from "typescript";
+import { BaseButton } from "../components/styled";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -10,14 +10,8 @@ const ButtonContainer = styled.div`
   justify-content: space-around;
 `;
 
-const Button = styled.button`
+const Button = styled(BaseButton)`
   font-size: var(--text-3x);
-  background-color: var(--button-colour);
-  color: var(--text-light);
-  font-family: Helvetica, sans-serif;
-  border-radius: 4px;
-  padding: 8px;
-  cursor: pointer;
 `;
 
 const TextContainer = styled.div`
