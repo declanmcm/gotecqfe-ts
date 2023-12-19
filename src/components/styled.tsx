@@ -9,4 +9,14 @@ export const BaseButton = styled.button`
   border-radius: 8px;
   line-height: 1;
   cursor: pointer;
+  &:hover {
+    background-color: var(--button-hover);
+  }
 `
+
+export const TitleContainer = styled.div`
+  display: flex;
+  margin: 15px;
+  justify-content: space-between;
+  gap: 10px;
+`;

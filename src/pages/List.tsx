@@ -1,5 +1,5 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Header from "../components/Header";
 import { UserData, ProblemData, ProblemEditor } from ".";
 import ReactDOM from "react-dom";
@@ -20,7 +20,7 @@ import { BaseButton } from "../components/styled";
 const url = "https://34.124.232.186:5000/";
 
 const Loading = styled.p`
-  font-size: 26px;
+  font-size: var(--text-4x);
   color: var(--text-light);
 `;
 
@@ -32,7 +32,7 @@ const Container = styled.div`
 `;
 
 const Panel = styled.div`
-  flex: 1;
+  flex: 0 0 400px;
   text-align: center;
   font-size: var(--text-7x);
   border-style: solid;
@@ -77,6 +77,7 @@ const SelectedItem = styled.div`
   border-color: var(--selected-colour);
   border-radius: 10px;
   margin: 15px;
+  cursor: pointer;
 `;
 
 const Item = styled.div`
@@ -84,6 +85,7 @@ const Item = styled.div`
   background: var(--item-colour);
   border-radius: 5px;
   margin: 15px;
+  cursor: pointer;
 `;
 
 const ItemNewColour = styled.div`
@@ -106,14 +108,13 @@ const BoldText = styled.p`
 
 const TitleContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  gap: 10px;
-  margin: 10px;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 15px;
 `;
 
 const Heading = styled.h1`
-    margin: 0px;
-    font-size: 60px;
+  margin: 0px;
 `;
 
 type ListProps = {
@@ -211,6 +212,10 @@ function List({ type }: ListProps) {
     fetchData();
   }, [currentItem, navigate]);
 
+  const activeItem = useCallback((item: User | Problem) => {
+    navigate(`/judge-manager/app/${type}/${item.id}`);
+    setCurrentItem(item);
+  }, [navigate, type]);
   useEffect(() => {
     let storedToken = window.localStorage.getItem("token");
     if (storedToken !== "") setToken(storedToken);
@@ -248,12 +253,12 @@ function List({ type }: ListProps) {
             (data.data as Array<User> | Array<Problem>).forEach(
               (item: User | Problem) => {
                 if (item.id === parseInt(id ? id : "0")) {
-                  setCurrentItem(item);
+                  activeItem(item);
                 }
               }
             );
           } else {
-            setCurrentItem(data.data[0]);
+            activeItem(data.data[0]);
           }
         }
       } catch (error) {
@@ -264,12 +269,8 @@ function List({ type }: ListProps) {
     if (storedToken !== "") {
       fetchData();
     }
-  }, [type, token, id, navigate, currentPage]);
+  }, [type, token, id, navigate, currentPage, activeItem]);
 
-  const activeItem = (item: User | Problem) => {
-    navigate(`/judge-manager/app/${type}/${item.id}`);
-    setCurrentItem(item);
-  };
   const formMode = searchParams.get('mode');
 
   return (

@@ -2,12 +2,13 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Problem } from "../models";
 import styled from "styled-components";
-import { BaseButton } from "../components/styled";
+import { BaseButton, TitleContainer } from "../components/styled";
 
 const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  gap: 15px;
 `;
 
 const Button = styled(BaseButton)`
@@ -35,21 +36,6 @@ const LeftText = styled.p`
   margin: 20px;
 `;
 
-const Wrapper = styled.div`
-  margin: 15px;
-  &:hover ${Button} {
-    background-color: var(--button-hover);
-  }
-`;
-
-const TitleContainer = styled.div`
-  display: flex;
-  margin-left: 150px;
-  margin-right: 40px;
-  justify-content: space-between;
-  gap: 10px;
-`;
-
 type ProblemDataProps = {
   problem: Problem;
   hidden: boolean;
@@ -74,20 +60,16 @@ function ProblemData({ problem, hidden, setHidden }: ProblemDataProps) {
       <TitleContainer>
         <h1>{problem.title}</h1>
         <ButtonContainer>
-          <Wrapper>
           <Button
             onClick={() => setSearchParams({ mode: 'edit' })}
           >
             {" "}
             Edit problem
           </Button>
-          </Wrapper>
-          <Wrapper>
           <Button onClick={toggleHidden}>
             {" "}
             {hidden ? "Show" : "Hide"} submission{" "}
           </Button>
-          </Wrapper>
         </ButtonContainer>
       </TitleContainer>
       <TextContainer>
