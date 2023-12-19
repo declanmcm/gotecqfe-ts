@@ -1,8 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Problem } from "../models";
 import styled from "styled-components";
-import { getNameOfDeclaration } from "typescript";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -62,7 +61,7 @@ type ProblemDataProps = {
   setHidden: React.Dispatch<React.SetStateAction<boolean>>;
 };
 function ProblemData({ problem, hidden, setHidden }: ProblemDataProps) {
-  const navigate = useNavigate();
+  const [, setSearchParams] = useSearchParams();
 
   function toggleHidden() {
     if (hidden) window.localStorage.setItem("hidden", "true");
@@ -82,7 +81,7 @@ function ProblemData({ problem, hidden, setHidden }: ProblemDataProps) {
         <ButtonContainer>
           <Wrapper>
           <Button
-            onClick={() => navigate(`/judge-manager/app/problem/${problem.id}`)}
+            onClick={() => setSearchParams({ mode: 'edit' })}
           >
             {" "}
             Edit problem
