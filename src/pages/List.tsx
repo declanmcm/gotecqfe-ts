@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { UserData, ProblemData, ProblemEditor } from ".";
@@ -145,6 +145,7 @@ const ItemWrapper = styled.div`
 
 function List({ type }: ListProps) {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [items, setItems] = useState<Array<Problem> | Array<User> | null>(null);
   const [filteredItems, setFilteredItems] = useState<
@@ -265,13 +266,16 @@ function List({ type }: ListProps) {
       }
     };
 
-    setCurrentItem(null);
-    setFilteredItems(null);
-
     if (storedToken !== "") {
       fetchData();
     }
   }, [type, token, id, navigate, currentPage]);
+
+  const activeItem = (item: User | Problem) => {
+    navigate(`/judge-manager/app/${type}/${item.id}`);
+    setCurrentItem(item);
+  };
+  const formMode = searchParams.get('mode');
 
   return (
     <div id="modal-root">
@@ -289,22 +293,23 @@ function List({ type }: ListProps) {
               {type === "problem" && (
                 <Wrapper>
                 <AppButton
-                  onClick={() => navigate("/judge-manager/app/problem/new")}
+                  onClick={() => {
+                    setSearchParams({ mode: 'new' })
+                  }}
                 >
-                  {" "}
                   Create
                 </AppButton>
                 </Wrapper>
               )}
               </TitleContainer>
-              {filteredItems != null ? (
+              {(filteredItems != null && type === 'user') ? (
                 filteredItems.map((item) => {
                   let ItemType: any = null;
                   if (currentItem != null && currentItem.id === item.id)
                     ItemType = SelectedItem;
                   else ItemType = Item;
                   return (
-                    <ItemWrapper><ItemType onClick={() => setCurrentItem(item)}>
+                    <ItemWrapper><ItemType onClick={() => activeItem(item)}>
                       {type === "user" && "username" in item ? (
                         <ItemText>
                           <BoldText>{item.username}</BoldText> Joined with email{" "}
@@ -329,7 +334,7 @@ function List({ type }: ListProps) {
                           ItemType = SelectedItem;
                         else ItemType = Item;
                         return (
-                          <ItemWrapper><ItemType onClick={() => setCurrentItem(item)}>
+                          <ItemWrapper><ItemType onClick={() => activeItem(item)}>
                             {type === "user" && "username" in item ? (
                               <ItemText>
                                 <BoldText>{item.username}</BoldText> Joined with
@@ -429,10 +434,10 @@ function List({ type }: ListProps) {
           </Container>
         </div>
       )}
-      {id != null && id !== "all" ? (
+      {(id != null && formMode) ? (
         <Modal
           child={
-            <ProblemEditor toEdit={id === "new" ? null : currentItem} id={id} />
+            <ProblemEditor toEdit={formMode === "new" ? null : currentItem} id={id} />
           }
         />
       ) : null}

@@ -47,7 +47,7 @@ function JudgeApp() {
           </Button>
           </Wrapper>
         <Wrapper>
-          <Button onClick={() => navigate("/judge-manager/app/problem/all")}>
+          <Button onClick={() => navigate("/judge-manager/app/problem")}>
             See problems
           </Button>
           </Wrapper>

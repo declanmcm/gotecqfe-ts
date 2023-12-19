@@ -1,7 +1,7 @@
 {
   "name": "gotecqfe-ts",
   "version": "0.1.0",
-  "homepage": "http://declanmcm.github.io/gotecqfe-ts",
+  "homepage": "/gotecqfe-ts",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
