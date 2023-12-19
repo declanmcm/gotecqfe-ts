@@ -138,7 +138,7 @@ function UserData({
           <br />
           <br />
           User permissions: <br />{" "}
-          {currentUser.user_permissions.length == 0
+          {currentUser.user_permissions.length === 0
             ? "None"
             : currentUser.user_permissions.toString()}
         </Text>
