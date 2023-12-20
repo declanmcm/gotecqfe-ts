@@ -20,7 +20,7 @@ import { BaseButton } from "../components/styled";
 const url = "https://34.124.232.186:5000/";
 
 const Loading = styled.p`
-  font-size: 26px;
+  font-size: var(--text-4x);
   color: var(--text-light);
 `;
 
@@ -32,7 +32,7 @@ const Container = styled.div`
 `;
 
 const Panel = styled.div`
-  flex: 1;
+  flex: 0 0 400px;
   text-align: center;
   font-size: var(--text-7x);
   border-style: solid;
@@ -57,8 +57,11 @@ const PanelNewColour = styled.div`
   border-style: solid;
   border-radius: 10px;
   border-color: var(--border-colour);
-  background: var(--item-colour);
+  background: var(--background-colour);
   margin: 15px;
+  h1 {
+    margin-top: 15px;
+  }
 `;
 
 const GridContainer = styled.div`
@@ -77,6 +80,7 @@ const SelectedItem = styled.div`
   border-color: var(--selected-colour);
   border-radius: 10px;
   margin: 15px;
+  cursor: pointer;
 `;
 
 const Item = styled.div`
@@ -84,6 +88,7 @@ const Item = styled.div`
   background: var(--item-colour);
   border-radius: 5px;
   margin: 15px;
+  cursor: pointer;
 `;
 
 const ItemNewColour = styled.div`
@@ -91,6 +96,12 @@ const ItemNewColour = styled.div`
   background: var(--alt-item-colour);
   border-radius: 5px;
   margin: 15px;
+  padding: 15px;
+  font-size: var(--text-lg);
+  p {
+    margin: 0;
+    margin-bottom: 15px;
+  }
 `;
 
 const ItemText = styled.div`
@@ -106,14 +117,13 @@ const BoldText = styled.p`
 
 const TitleContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  gap: 10px;
-  margin: 10px;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 15px;
 `;
 
 const Heading = styled.h1`
-    margin: 0px;
-    font-size: 60px;
+  margin: 0px;
 `;
 
 type ListProps = {

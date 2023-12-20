@@ -2,12 +2,14 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Problem } from "../models";
 import styled from "styled-components";
-import { BaseButton } from "../components/styled";
+import { BaseButton, GridContainer, TitleContainer, Text } from "../components/styled";
+import { Formatter } from "../components/Formatter";
 
 const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  gap: 15px;
 `;
 
 const Button = styled(BaseButton)`
@@ -16,38 +18,6 @@ const Button = styled(BaseButton)`
 
 const TextContainer = styled.div`
   font-size: var(--text-xl);
-`;
-
-const GridContainer = styled.div`
-  margin: 20px;
-  display: grid;
-  align-items: stretch;
-  grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
-`;
-
-const Text = styled.p`
-  font-size: var(--text-3x);
-`;
-
-const LeftText = styled.p`
-  font-size: var(--text-3x);
-  text-align: left;
-  margin: 20px;
-`;
-
-const Wrapper = styled.div`
-  margin: 15px;
-  &:hover ${Button} {
-    background-color: var(--button-hover);
-  }
-`;
-
-const TitleContainer = styled.div`
-  display: flex;
-  margin-left: 150px;
-  margin-right: 40px;
-  justify-content: space-between;
-  gap: 10px;
 `;
 
 type ProblemDataProps = {
@@ -74,48 +44,45 @@ function ProblemData({ problem, hidden, setHidden }: ProblemDataProps) {
       <TitleContainer>
         <h1>{problem.title}</h1>
         <ButtonContainer>
-          <Wrapper>
           <Button
             onClick={() => setSearchParams({ mode: 'edit' })}
           >
             {" "}
             Edit problem
           </Button>
-          </Wrapper>
-          <Wrapper>
           <Button onClick={toggleHidden}>
             {" "}
             {hidden ? "Show" : "Hide"} submission{" "}
           </Button>
-          </Wrapper>
         </ButtonContainer>
       </TitleContainer>
       <TextContainer>
         <GridContainer>
-          <Text>ID: {problem.id} </Text>
-          <Text>Display ID: {problem.display_id} </Text>
-          <Text>Author ID: {problem.author_id}</Text>
-          <Text>Author Name: {problem.author_name}</Text>
-          <Text>Time limit: {problem.time_limit} </Text>
-          <Text>Memory limit: {problem.memory_limit} </Text>
-          <Text>Created: {problem.created} </Text>
-          <Text>Difficulty: {problem.difficulty} </Text>
-          <Text>Visible: {problem.is_visible ? "Yes" : "No"} </Text>
-          <Text>Total submissions: {problem.total_submission} </Text>
-          <Text>Correct submissions: {problem.correct_submission} </Text>
-          <Text>Time limit: {problem.time_limit}</Text>
-          <Text>Tags: {problem.tags.toString()}</Text>
-          <Text>Source: {problem.source}</Text>
-          <Text>Sample test: {problem.sample_test.toString()}</Text>
-          <Text>Test zip: {problem.test_zip ? problem.test_zip : "None"} </Text>
+          <Text><label>ID</label><div>{problem.id}</div></Text>
+          <Text><label>Display ID</label><div>{problem.display_id}</div></Text>
+          <Text><label>Author ID</label><div>{problem.author_id}</div></Text>
+          <Text><label>Author Name</label><div>{problem.author_name}</div></Text>
+          <Text><label>Time limit</label><div>{problem.time_limit}</div></Text>
+          <Text><label>Memory limit</label><div>{problem.memory_limit}</div></Text>
+          <Text><label>Created</label><div>{problem.created}</div></Text>
+          <Text><label>Difficulty</label><div>{problem.difficulty}</div></Text>
+          <Text><label>Visible</label><div>{problem.is_visible ? "Yes" : "No"}</div></Text>
+          <Text><label>Total submissions</label><div>{problem.total_submission}</div></Text>
+          <Text><label>Correct submissions</label><div>{problem.correct_submission}</div></Text>
+          <Text><label>Time limit</label><div>{problem.time_limit}</div></Text>
+          <Text><label>Tags</label><div>{<Formatter data={problem.tags} />}</div></Text>
+          <Text><label>Source</label><div>{problem.source}</div></Text>
+          <Text><label>Sample test</label><div>{<Formatter data={problem.sample_test} />}</div></Text>
+          <Text><label>Test zip</label><div>{problem.test_zip ? problem.test_zip : "None"}</div></Text>
+          <Text className="span-all">
+            <label>Question</label>
+            {problem.statement}
+            <br />
+            <br />
+            <label>Statistic info</label>
+            {<Formatter data={problem.statistic_info} />}
+          </Text>
         </GridContainer>
-        <LeftText>
-          Question: <br />
-          {problem.statement}
-          <br />
-          <br />
-          Statistic info: {problem.statistic_info.toString()}
-        </LeftText>
       </TextContainer>
     </div>
   );

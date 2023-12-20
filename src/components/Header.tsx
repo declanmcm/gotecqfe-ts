@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BaseButton } from "./styled";
 
 const Button = styled(BaseButton)`
-  font-size: 30px;
+  font-size: var(--text-xl);
   border-radius: 4px;
 `;
 

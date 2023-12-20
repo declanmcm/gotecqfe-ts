@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BaseButton } from './styled';
 
 const SmallButton = styled(BaseButton)`
-    font-size: 15px;
+    font-size: var(--text-md);
     border-radius: 3px;
     padding: 4px;
 `;
