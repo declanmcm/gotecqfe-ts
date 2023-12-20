@@ -219,8 +219,12 @@ function List({ type }: ListProps) {
     };
 
     fetchData();
-  }, [currentItem, navigate]);
+  }, [navigate]);
 
+  const activeItem = useCallback((item: User | Problem) => {
+    navigate(`/judge-manager/app/${type}/${item.id}`);
+    setCurrentItem(item);
+  }, [navigate, type]);
   useEffect(() => {
     let storedToken = window.localStorage.getItem("token");
     if (storedToken !== "") setToken(storedToken);
@@ -258,12 +262,12 @@ function List({ type }: ListProps) {
             (data.data as Array<User> | Array<Problem>).forEach(
               (item: User | Problem) => {
                 if (item.id === parseInt(id ? id : "0")) {
-                  setCurrentItem(item);
+                  activeItem(item);
                 }
               }
             );
           } else {
-            setCurrentItem(data.data[0]);
+            activeItem(data.data[0]);
           }
         }
       } catch (error) {
@@ -274,12 +278,8 @@ function List({ type }: ListProps) {
     if (storedToken !== "") {
       fetchData();
     }
-  }, [type, token, id, navigate, currentPage]);
+  }, [type, token, id, navigate, currentPage, activeItem]);
 
-  const activeItem = useCallback((item: User | Problem) => {
-    navigate(`/judge-manager/app/${type}/${item.id}`);
-    setCurrentItem(item);
-  }, [navigate, type]);
   const formMode = searchParams.get('mode');
 
   return (

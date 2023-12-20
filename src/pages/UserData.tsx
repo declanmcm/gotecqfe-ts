@@ -117,7 +117,7 @@ function UserData({
             <br />
             <br />
             <label>User permissions</label>
-            {currentUser.user_permissions.length == 0
+            {currentUser.user_permissions.length === 0
               ? "None"
               : <Formatter data={currentUser.user_permissions} />}
           </Text>

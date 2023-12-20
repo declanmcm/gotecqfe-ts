@@ -51,7 +51,7 @@ export default function Pagination({ setCurrentPage, currentPage, surroundingPag
         <Wrapper>
         <SmallButton onClick={() => handlePageChange(currentPage - 1)}>Previous</SmallButton>
         </Wrapper>
-        {surroundingPages && surroundingPages[0] != 1 ?
+        {surroundingPages && surroundingPages[0] !== 1 ?
             <Wrapper><SmallButton>...</SmallButton></Wrapper>: null}
         {surroundingPages != null ?
             (surroundingPages.map(page => {
@@ -59,7 +59,7 @@ export default function Pagination({ setCurrentPage, currentPage, surroundingPag
                 if (page === currentPage) ButtonType = SmallButtonActive;
                 return <Wrapper><ButtonType onClick={() => handlePageChange(page)}>{page}</ButtonType></Wrapper>;
             })) : null}
-        {surroundingPages && surroundingPages[surroundingPages.length - 1] != totalPages ?
+        {surroundingPages && surroundingPages[surroundingPages.length - 1] !== totalPages ?
             <Wrapper><SmallButton>...</SmallButton></Wrapper> : null}
             <Wrapper>
         <SmallButton onClick={() => handlePageChange(currentPage + 1)}>Next</SmallButton>
