@@ -14,9 +14,9 @@ code {
 
 :root {
   --background-colour: #e0ebeb;
-  --panel-colour: #5dacbd;
-  --item-colour: #a7bcb9;
-  --alt-item-colour: #99b6a7;
+  --panel-colour: #71c7da;
+  --item-colour: #c2deda;
+  --alt-item-colour: #cce2d7;
   --border-colour: grey;
   --text-light: #e0ebeb;
   --text-dark: black;
@@ -29,8 +29,8 @@ code {
   --auth-container-colour: #e5f2dc;
   --text-error: red;
   --text-form: #4f4e4e;
-  --header-color: #5d84bd;
   --form-background-colour: #bee4d7;
+  --header-color: #b5d3ff;
   
   --text-xs: 12px;
   --text-sm: 14px;
@@ -43,4 +43,9 @@ code {
   --text-5x: 28px;
   --text-6x: 30px;
   --text-7x: 32px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 0;
 }

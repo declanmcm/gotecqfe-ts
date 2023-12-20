@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { Problem, User, getProblem } from "../models";
 import styled from "styled-components";
@@ -71,6 +71,7 @@ type ProblemEditorProps = {
 };
 function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   let initItem = getProblem() as Problem | User;
   if (toEdit != null) initItem = toEdit;
   const [problem, setProblem] = useState<Problem | User>(initItem);
@@ -323,7 +324,10 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
               <BaseButton
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate(`/judge-manager/app/problem/${id}`);
+                  if (searchParams.has('mode')) {
+                    searchParams.delete('mode');
+                    setSearchParams(searchParams);
+                  }
                 }}
               >
                 {" "}

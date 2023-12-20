@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BaseButton } from "./styled";
 
 const Button = styled(BaseButton)`
-  font-size: 30px;
+  font-size: var(--text-xl);
   border-radius: 4px;
 `;
 
@@ -36,7 +36,7 @@ export default function Header({ text }: { text: string }) {
   function handleChange() {
     console.log(text);
     if (text === "User") navigate("/judge-manager/app/user");
-    else navigate("/judge-manager/app/problem/all");
+    else navigate("/judge-manager/app/problem");
   }
 
   return (
