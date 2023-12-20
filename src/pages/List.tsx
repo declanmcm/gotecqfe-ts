@@ -108,6 +108,11 @@ const ItemText = styled.div`
   font-size: var(--text-2x);
   user-select: none;
   padding: 16px;
+  text-align: left;
+  p {
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
 const BoldText = styled.p`
@@ -281,6 +286,7 @@ function List({ type }: ListProps) {
   }, [type, token, id, navigate, currentPage, activeItem]);
 
   const formMode = searchParams.get('mode');
+  console.log("🚀 ~ file: List.tsx:274 ~ List ~ formMode:", formMode)
 
   return (
     <div id="modal-root">
@@ -442,7 +448,10 @@ function List({ type }: ListProps) {
       {(id != null && formMode) ? (
         <Modal
           child={
-            <ProblemEditor toEdit={formMode === "new" ? null : currentItem} id={id} />
+            <ProblemEditor
+              toEdit={formMode === "new" ? null : currentItem}
+              id={formMode === "new" ? "new" : id}
+            />
           }
         />
       ) : null}

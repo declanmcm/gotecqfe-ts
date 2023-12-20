@@ -13,13 +13,11 @@
   }
   
   .modal-content {
-    width: 70%;
-    height: 70%;
-    background-color: #209e74;
-    color: #fff;
+    background-color: var(--form-background-colour);
     display: flex;
-    align-items: center;
-    overflow: scroll;
+    overflow: hidden;
     justify-content: center;
     font-size: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-colour);
   }
