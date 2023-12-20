@@ -57,8 +57,11 @@ const PanelNewColour = styled.div`
   border-style: solid;
   border-radius: 10px;
   border-color: var(--border-colour);
-  background: var(--item-colour);
+  background: var(--background-colour);
   margin: 15px;
+  h1 {
+    margin-top: 15px;
+  }
 `;
 
 const GridContainer = styled.div`
@@ -93,6 +96,12 @@ const ItemNewColour = styled.div`
   background: var(--alt-item-colour);
   border-radius: 5px;
   margin: 15px;
+  padding: 15px;
+  font-size: var(--text-lg);
+  p {
+    margin: 0;
+    margin-bottom: 15px;
+  }
 `;
 
 const ItemText = styled.div`
