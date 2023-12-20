@@ -18,7 +18,7 @@ const FormContainer = styled.form`
 const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 
 const Fieldset = styled.fieldset`
   display: flex;
@@ -92,12 +92,19 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
       let data = new FormData();
 
       Object.entries(problem).forEach(([key, value]) => {
-        data.append(key, value);
+        let normalizedValue = value;
+        if (key === 'tags') normalizedValue = (value as Array<{ id: string, tag_name: string }>)
+          .map(entry => entry.tag_name);
+
+        data.append(
+          key,
+          typeof normalizedValue === 'object' ? JSON.stringify(normalizedValue) : normalizedValue,
+        )
       });
       console.log(data);
 
       const response = await fetch(
-        "https://34.124.232.186:5000/admin/problem/" + toAppend + "/",
+        "https://34.124.232.186:5000/admin/problem/" + toAppend + id === "new" ? "" : "/",
         {
           method: method,
           headers: {
@@ -206,10 +213,8 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
                 }
                 name="sample_test"
                 onChange={(e) => {
-                  setProblem({
-                    ...problem,
-                    sample_test: JSON.parse(e.target.value),
-                  });
+                  console.log(e.target.value);
+                  setProblem({ ...problem, sample_test: JSON.parse(e.target.value) });
                 }}
               />
             </div>
@@ -239,10 +244,7 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
                 name="time_limit"
                 type="number"
                 onChange={(e) =>
-                  setProblem({
-                    ...problem,
-                    time_limit: parseInt(e.target.value),
-                  })
+                  setProblem({ ...problem, time_limit: parseInt(e.target.value) })
                 }
               />
             </div>
@@ -255,10 +257,7 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
                 name="memory_limit"
                 type="number"
                 onChange={(e) =>
-                  setProblem({
-                    ...problem,
-                    memory_limit: parseInt(e.target.value),
-                  })
+                  setProblem({ ...problem, memory_limit: parseInt(e.target.value) })
                 }
               />
             </div>
@@ -273,10 +272,7 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
                 name="total_submission"
                 type="number"
                 onChange={(e) =>
-                  setProblem({
-                    ...problem,
-                    total_submission: parseInt(e.target.value),
-                  })
+                  setProblem({ ...problem, total_submission: parseInt(e.target.value) })
                 }
               />
             </div>
@@ -293,10 +289,7 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
                 name="correct_submission"
                 type="number"
                 onChange={(e) =>
-                  setProblem({
-                    ...problem,
-                    correct_submission: parseInt(e.target.value),
-                  })
+                  setProblem({ ...problem, correct_submission: parseInt(e.target.value) })
                 }
               />
             </div>
@@ -306,16 +299,13 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
             <div>
               <TextArea
                 defaultValue={
-                  "sample_test" in problem
-                    ? JSON.stringify(problem.sample_test)
+                  "statistic_info" in problem
+                    ? JSON.stringify(problem.statistic_info)
                     : ""
                 }
                 name="statistic_info"
                 onChange={(e) =>
-                  setProblem({
-                    ...problem,
-                    statistic_info: JSON.parse(e.target.value),
-                  })
+                  setProblem({ ...problem, statistic_info: JSON.parse(e.target.value) })
                 }
               />
             </div>
@@ -333,7 +323,7 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
               <BaseButton
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate("/judge-manager/app/problem/all");
+                  navigate(`/judge-manager/app/problem/${id}`);
                 }}
               >
                 {" "}
