@@ -97,6 +97,11 @@ const ItemText = styled.div`
   font-size: var(--text-2x);
   user-select: none;
   padding: 16px;
+  text-align: left;
+  p {
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
 const BoldText = styled.p`

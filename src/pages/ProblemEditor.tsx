@@ -104,7 +104,7 @@ function ProblemEditor({ toEdit, id }: ProblemEditorProps) {
       console.log(data);
 
       const response = await fetch(
-        "https://34.124.232.186:5000/admin/problem/" + toAppend + id === "new" ? "" : "/",
+        "https://34.124.232.186:5000/admin/problem/" + toAppend + (id === "new" ? "" : "/"),
         {
           method: method,
           headers: {

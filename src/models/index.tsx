@@ -95,23 +95,23 @@ export const getProblem = () => {
         "tags": [
             {
                 "id": 0,
-                "tag_name": ""
+                "tag_name": "uncategoriezd"
             }
         ],
         "source": null as string | null,
         "sample_test": [
             {
-                "input": "",
-                "output": ""
+                "input": "Sample Input 1",
+                "output": "Sample Output 1"
             },
             {
-                "input": "",
-                "output": ""
+                "input": "Sample Input 2",
+                "output": "Sample Output 2"
             }
         ],
         "test_zip": null as string | null,
-        "time_limit": 0,
-        "memory_limit": 0,
+        "time_limit": 1000,
+        "memory_limit": 1000,
         "total_submission": 0,
         "correct_submission": 0,
         "statistic_info": {
