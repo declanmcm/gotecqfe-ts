@@ -7,6 +7,7 @@ const Heading = styled.h1`
   font-family: Helvetica, sans-serif;
   color: var(--text-dark);
   font-size: 76px;
+  margin-bottom: 15px;
 `;
 
 const ButtonContainer = styled.div`
